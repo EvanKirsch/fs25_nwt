@@ -24,9 +24,8 @@ function NWT_netWorthCalcUtil:getEntries(farmId)
 
     entryTable = self:getEquipmentEntries(entryTable, farmId)
     entryTable = self:getFarmlandEntries(entryTable, farmId)
-    entryTable = self:getSpawnedPalletEntries(entryTable, farmId)
     entryTable = self:getPlaceableEntries(entryTable, farmId)
-    entryTable = NWT_fillCalcUtil:getPlaceableFillEntries(entryTable, farmId)
+    entryTable = NWT_fillCalcUtil:getFillEntries(entryTable, farmId)
     -- todo 
     --     livestock
     --     production chains
@@ -53,29 +52,6 @@ function NWT_netWorthCalcUtil:getEquipmentEntries(entryTable, farmId)
 
         end
     end
-
-    return entryTable
-end
-
-function NWT_netWorthCalcUtil:getSpawnedPalletEntries(entryTable, farmId)
-    for _, vehicle in ipairs(g_currentMission.vehicleSystem.vehicles) do
-        if vehicle.ownerFarmId == farmId 
-            and vehicle.getSellPrice ~= nil 
-            and vehicle.typeName ~= nil 
-            and (vehicle.typeName == "pallet"               -- include spawned pallets 
-                or vehicle.typeName == "treeSaplingPallet"  -- include spawned tree sapling pallets
-                or vehicle.typeName == "bigBag")            -- include bags
-            and vehicle.propertyState == VehiclePropertyState.OWNED then
-
-            local asset = NWT_entry.new(g_currentMission:getIsServer(), g_currentMission:getIsClient())
-            asset:init(farmId, vehicle:getFullName(), "Pallet", "",  vehicle:getSellPrice())
-            asset:register()
-            table.insert(entryTable, asset)
-            
-        end
-    end
-
-    -- todo include with placeable stock
 
     return entryTable
 end
