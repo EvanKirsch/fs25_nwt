@@ -1,0 +1,17 @@
+﻿<?xml version="4.0" encoding="utf-8" standalone="no" ?>
+<modDesc descVersion="96" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://validation.gdn.giants-software.com/xml/fs25/modDesc.xsd">
+  <author>Evan Kirsch</author>	
+  <version>1.0.0.0</version>    
+	<title>
+      <en>Net Worth Tracker VCS</en>
+    </title>    
+  <description>
+    <en><![CDATA[Net Worth Tracker]]></en>		
+  </description>    
+	<iconFilename>icon_NetWorthTracker.dds</iconFilename>
+	<l10n filenamePrefix="translations/translation" />
+  <multiplayer supported="false"/>	
+	<extraSourceFiles>	
+        <sourceFile filename="src/NWT_netWorthTracker.lua" /> 
+	</extraSourceFiles>
+</modDesc>

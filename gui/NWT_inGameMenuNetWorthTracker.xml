@@ -1,0 +1,133 @@
+<?xml version="2.0" encoding="utf-8" standalone="no" ?>
+<GUI name="NWT_inGameMenuNetWorthTracker">
+	<GuiElement profile="fs25_menuContainer">
+		<GuiElement profile="fs25_menuHeaderPanel">
+            <Text profile="NWT_menuHeaderText" text="$l10n_ui_header_title" />
+        </GuiElement>
+
+        <GuiElement profile="fs25_statisticsHeaderBox">
+            <Button profile="NWT_inGameMenuHeader" position="20px 0px" text="$l10n_ui_header_lineitem" handleFocus="false" />
+            <Button profile="NWT_inGameMenuHeader" position="500px 0px" text="$l10n_ui_header_catagory" handleFocus="false" />
+            <Button profile="NWT_inGameMenuHeaderRight" position="1250px 0px" size="280px 32px" text="$l10n_ui_header_value" handleFocus="false" />
+        </GuiElement>
+
+        <SmoothList profile="NWT_list" size="100% 710px" id="entryTable" >
+            <ListItem profile="NWT_listItem" >
+                <Text profile="NWT_rowCellLeft" position="20px 0px" size="500px 20px" name="entryTitle"/>
+                <Text profile="NWT_rowCellLeft" position="500px 0px" size="200px 20px" name="entryCatagory"/>
+                <Text profile="NWT_rowCellLeft" position="800px 0px" size="200px 20px" name="entryDetails"/>
+                <Text profile="NWT_rowCellRight" position="-20px 0px" size="500px 20px" name="entryAmount"/>
+            </ListItem>
+        </SmoothList>
+        
+        <ThreePartBitmap profile="NWT_inGameMenuSlider" >
+            <Slider profile="fs25_listSlider" dataElementId="entryTable"/>
+        </ThreePartBitmap>
+        <GuiElement profile="NWT_inGameMenuFooterBox">
+            <ThreePartBitmap profile="fs25_lineSeparatorTop" position="0px -15dp"/>
+            <Text profile="NWT_inGameMenuFooter" position="20px 0px" size="500px 20px" text="Total"/>
+            <Text profile="NWT_inGameMenuFooterRight" position="-20px 0px" size="500px 20px" id="netWorthTotalValue"/>
+        </GuiElement>
+    </GuiElement>
+
+
+    <GUIProfiles>
+
+        <Profile name="NWT_inGameMenuContainer" extends="fs25_menuContainer">
+        </Profile>
+    
+        <Profile name="NWT_inGameMenuSlider" extends="fs25_listSliderBox" with="anchorTopRight">
+            <position value="28px -40px" />
+            <size value="6px 710px"/>
+        </Profile>
+    
+        <Profile name="NWT_inGameMenuHeader" extends="baseReference">
+            <size value="500px 32px" />
+            <imageColor value="0 0 0 0" />
+            <textFocusedColor value="$preset_fs25_colorMainHighlight" />
+            <textHighlightedColor value="$preset_fs25_colorMainHighlight" />
+            <textSize value="16px" />
+            <textBold value="true" />
+            <textUpperCase value="true" />
+            <textColor value="$preset_colorWhite_50" />
+            <textAlignment value="left" />
+            <textDisabledColor value="$preset_colorDisabled" />
+        </Profile>
+    
+        <Profile name="NWT_inGameMenuHeaderRight" extends="baseReference">
+            <size value="500px 32px" />
+            <imageColor value="0 0 0 0" />
+            <textFocusedColor value="$preset_fs25_colorMainHighlight" />
+            <textHighlightedColor value="$preset_fs25_colorMainHighlight" />
+            <textSize value="16px" />
+            <textBold value="true" />
+            <textUpperCase value="true" />
+            <textColor value="$preset_colorWhite_50" />
+            <textAlignment value="right" />
+            <textDisabledColor value="$preset_colorDisabled" />
+        </Profile>
+    
+         <Profile name="NWT_list" extends="emptyPanel" with="anchorStretchingYLeft pivotTopLeft">
+             <position value="0px -40px" />
+         </Profile>
+    
+         <Profile name="NWT_listItem" extends="baseReference" with="anchorTopStretchingX alternating">
+             <height value="32px"/>
+             <imageColor value="$preset_fs25_colorGrey" />
+             <imageSelectedColor value="$preset_fs25_colorMainHighlight" />
+             <alternateBackgroundColor value="$preset_fs25_colorGreyDark_50" />
+         </Profile>
+    
+         <Profile name="NWT_rowCell" extends="baseReference" with="anchorStretchingYLeft">
+             <textSize value="16px" />
+             <textAlignment value="center" />
+         </Profile>
+
+         <Profile name="NWT_rowCellLeft" extends="NWT_rowCell" with="anchorStretchingYLeft">
+             <textAlignment value="left" />
+         </Profile>
+         <Profile name="NWT_rowCellRight" extends="NWT_rowCell" with="anchorStretchingYRight">
+             <textAlignment value="right" />
+         </Profile>
+
+         <Profile name="NWT_listItemSubTotalLeft" extends="NWT_rowCellLeft" with="anchorStretchingYLeft">
+             <textUpperCase value="true" />
+             <textBold value="true" />
+         </Profile>
+         <Profile name="NWT_listItemSubTotalRight" extends="NWT_rowCellRight" with="anchorStretchingYRight">
+             <textUpperCase value="true" />
+             <textBold value="true" />
+         </Profile>
+
+
+         <Profile name="NWT_menuHeaderText" extends="fs25_textDefault">
+             <size value="600px 64px" />
+             <position value="0px 0px" />
+             <textSize value="31px"/>
+             <textBold value="false"/>
+             <textUpperCase value="true"/>
+             <textDisabledColor value="$preset_colorDisabled"/>
+         </Profile>
+
+        <Profile name="NWT_inGameMenuFooterBox" extends="baseReference" with="anchorBottomStretchingX">
+            <size value="100% 50px"/>
+        </Profile>
+
+        <Profile name="NWT_inGameMenuFooter" extends="baseReference">
+            <imageColor value="0 0 0 0" />
+            <textFocusedColor value="$preset_fs25_colorMainHighlight" />
+            <textHighlightedColor value="$preset_fs25_colorMainHighlight" />
+            <textSize value="16px" />
+            <textBold value="true" />
+            <textUpperCase value="true" />
+            <textColor value="$preset_colorWhite_50" />
+            <textAlignment value="left" />
+            <textDisabledColor value="$preset_colorDisabled" />
+        </Profile>
+        <Profile name="NWT_inGameMenuFooterRight" extends="NWT_inGameMenuFooter" with="anchorStretchingYRight">
+            <textAlignment value="right" />
+        </Profile>
+
+
+    </GUIProfiles>
+</GUI>

@@ -1,0 +1,59 @@
+<!-- ?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<GUIProfiles>
+
+    <Presets>
+        <Preset name="colorMainUI"    value="0.0227 0.5346 0.8519 1.0"/>
+        <Preset name="colorWhite" value="1 1 1 1"/>
+        <Preset name="colorGrayHeader" value="0.4 0.4 0.4 1"/>
+        <Preset name="colorListHeaderBackground" value="0 0 0 0.35" />
+    </Presets>
+
+    <Profile name="NWT_InGameMenuSlider"  extends="fs25_listSliderBox" with="anchorTopRight">
+        <position value="28px -40px" />
+        <size value="6px 710px"/>
+    </Profile>
+
+    <Profile name="NWT_InGameMenuHeader" extends="baseReference">
+        <size value="500px 32px" />
+        <imageColor value="0 0 0 0" />
+        <textFocusedColor value="$preset_fs25_colorMainHighlight" />
+        <textHighlightedColor value="$preset_fs25_colorMainHighlight" />
+        <textSize value="16px" />
+        <textBold value="true" />
+        <textUpperCase value="true" />
+        <textColor value="$preset_colorWhite_50" />
+        <textAlignment value="left" />
+        <textDisabledColor value="$preset_colorDisabled" />
+    </Profile>
+
+    <Profile name="NWT_InGameMenuHeaderRight" extends="baseReference">
+        <size value="500px 32px" />
+        <imageColor value="0 0 0 0" />
+        <textFocusedColor value="$preset_fs25_colorMainHighlight" />
+        <textHighlightedColor value="$preset_fs25_colorMainHighlight" />
+        <textSize value="16px" />
+        <textBold value="true" />
+        <textUpperCase value="true" />
+        <textColor value="$preset_colorWhite_50" />
+        <textAlignment value="right" />
+        <textDisabledColor value="$preset_colorDisabled" />
+    </Profile>
+
+     <Profile name="NWT_list" extends="emptyPanel" with="anchorStretchingYLeft pivotTopLeft">
+         <position value="0px -40px" />
+     </Profile>
+
+     <Profile name="NWT_listItem" extends="baseReference" with="anchorTopStretchingX alternating">
+         <height value="32px"/>
+         <imageColor value="$preset_fs25_colorGrey" />
+         <imageSelectedColor value="$preset_fs25_colorMainHighlight" />
+         <alternateBackgroundColor value="$preset_fs25_colorGreyDark_50" />
+     </Profile>
+
+     <Profile name="NWT_rowCell" extends="baseReference" with="anchorStretchingYLeft">
+         <textSize value="16px" />
+         <textBold value="true" />
+         <textUpperCase value="true" />
+         <textAlignment value="center" />
+     </Profile>
+</GUIProfiles -->

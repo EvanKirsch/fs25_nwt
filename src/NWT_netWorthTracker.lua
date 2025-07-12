@@ -1,0 +1,80 @@
+-- NWT_netWorthTracker
+--
+-- Main driver class for NWT 
+--
+
+NWT_netWorthTracker = {}
+NWT_netWorthTracker.dir = g_currentModDirectory
+NWT_netWorthTracker.modName = g_currentModName
+NWT_netWorthTracker.debug = false
+
+source(NWT_netWorthTracker.dir .. "src/gui/NWT_inGameMenuNetWorthTracker.lua")
+source(NWT_netWorthTracker.dir .. "src/NWT_entry.lua")
+source(NWT_netWorthTracker.dir .. "src/util/NWT_netWorthCalcUtil.lua")
+
+function NWT_netWorthTracker:loadMap()
+	local guiNetWorthTracker = NWT_inGameMenuNetWorthTracker.new(g_i18n) 
+	g_gui:loadGui(NWT_netWorthTracker.dir .. "gui/NWT_inGameMenuNetWorthTracker.xml", "inGameMenuNetWorthTracker", guiNetWorthTracker, true)
+	
+	NWT_netWorthTracker.fixInGameMenu(guiNetWorthTracker,"ingameMenuNetWorthTracker", {0,0,1024,1024}, 2, nil)
+
+	guiNetWorthTracker:initialize()	
+
+end
+
+-- from Courseplay
+function NWT_netWorthTracker.fixInGameMenu(frame,pageName,uvs,position,predicateFunc)
+	local inGameMenu = g_gui.screenControllers[InGameMenu]
+	local position = #inGameMenu.pagingElement.elements - 1
+
+    -- print("--- NWT_netWorthTracker - inGameMenu print")
+    -- DebugUtil.printTableRecursively(inGameMenu.pagingElement)
+
+	-- remove all to avoid warnings
+	for k, v in pairs({pageName}) do
+		inGameMenu.controlIDs[v] = nil
+	end
+
+	inGameMenu[pageName] = frame
+	inGameMenu.pagingElement:addElement(inGameMenu[pageName])
+
+	inGameMenu:exposeControlsAsFields(pageName)
+
+	for i = 1, #inGameMenu.pagingElement.elements do
+		local child = inGameMenu.pagingElement.elements[i]
+		if child == inGameMenu[pageName] then
+			table.remove(inGameMenu.pagingElement.elements, i)
+			table.insert(inGameMenu.pagingElement.elements, position, child)
+			break
+		end
+	end
+
+	for i = 1, #inGameMenu.pagingElement.pages do
+		local child = inGameMenu.pagingElement.pages[i]
+		if child.element == inGameMenu[pageName] then
+			table.remove(inGameMenu.pagingElement.pages, i)
+			table.insert(inGameMenu.pagingElement.pages, position, child)
+			break
+		end
+	end
+
+	inGameMenu.pagingElement:updateAbsolutePosition()
+	inGameMenu.pagingElement:updatePageMapping()
+	
+	inGameMenu:registerPage(inGameMenu[pageName], position, predicateFunc)
+	local iconFileName = Utils.getFilename('images/menuIcon.dds', NWT_netWorthTracker.dir)
+	inGameMenu:addPageTab(inGameMenu[pageName],iconFileName, GuiUtils.getUVs(uvs))
+
+	for i = 1, #inGameMenu.pageFrames do
+		local child = inGameMenu.pageFrames[i]
+		if child == inGameMenu[pageName] then
+			table.remove(inGameMenu.pageFrames, i)
+			table.insert(inGameMenu.pageFrames, position, child)
+			break
+		end
+	end
+
+	inGameMenu:rebuildTabList()
+end
+
+addModEventListener(NWT_netWorthTracker)

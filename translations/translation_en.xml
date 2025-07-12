@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<l10n>
+    <texts>
+        <text name="ui_header_title" text="Farm Value"/>
+        <text name="ui_header_lineitem" text="Line Item"/>
+        <text name="ui_header_catagory" text="Catagory"/>
+        <text name="ui_header_value" text="Value"/>
+        <text name="table_equipment" text="Equipment Subtotal"/>
+        <text name="table_farmland" text="Farmland Subtotal"/>
+        <text name="table_cash" text="Cash"/>
+        <text name="table_loan" text="Loan"/>
+    </texts>
+</l10n>
