@@ -11,6 +11,7 @@ NWT_netWorthTracker.debug = false
 source(NWT_netWorthTracker.dir .. "src/gui/NWT_inGameMenuNetWorthTracker.lua")
 source(NWT_netWorthTracker.dir .. "src/NWT_entry.lua")
 source(NWT_netWorthTracker.dir .. "src/util/NWT_netWorthCalcUtil.lua")
+source(NWT_netWorthTracker.dir .. "src/util/NWT_fillCalcUtil.lua")
 
 function NWT_netWorthTracker:loadMap()
 	local guiNetWorthTracker = NWT_inGameMenuNetWorthTracker.new(g_i18n) 

@@ -64,13 +64,4 @@ function NWT_inGameMenuNetWorthTracker:populateCellForItemInSection(list, sectio
     cell:getAttribute("entryCatagory"):setText(loc_entryData.catagory)
     cell:getAttribute("entryDetails"):setText(loc_entryData.details)
     cell:getAttribute("entryAmount"):setText(g_i18n:formatMoney(loc_entryData.entryAmount, 0, true, true))
-    if loc_entryData.isSubTotal == true then
-        -- print("--- Header: " .. loc_entryData.entryTitle)
-        -- cell:getAttribute("entryTitle"):applyProfile("NWT_listItemSubTotalLeft")
-        -- cell:getAttribute("entryAmount"):applyProfile("NWT_listItemSubTotalRight")
-    else
-        -- print("  --- Cell: " .. loc_entryData.entryTitle)
-        -- cell:getAttribute("entryTitle"):applyProfile("NWT_rowCellLeft")
-        -- cell:getAttribute("entryAmount"):applyProfile("NWT_rowCellRight")
-    end
 end
