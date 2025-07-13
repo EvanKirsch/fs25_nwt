@@ -19,8 +19,7 @@ function NWT_fillCalcUtil:getFillEntries(entryTable, farmId)
     fillTable = self:getPlaceableFillEntries(fillTable, farmId)
     fillTable = self:getVehicleFillEntries(fillTable, farmId)
     fillTable = self:getBaleFillEntries(fillTable, farmId)
-    -- todo
-    --     production chains
+    fillTable = self:getProductionEntries(fillTable, farmId)
 
     for _, fillEntry in pairs(fillTable) do
         table.insert(entryTable, fillEntry)
@@ -62,6 +61,23 @@ function NWT_fillCalcUtil:getBaleFillEntries(fillTable, farmId)
             local storageFillLevels = {}
             storageFillLevels[fillId] = fillAmount
             fillTable = self:fillEntryCalculator(fillTable, farmId, storageFillLevels)
+
+        end
+    end
+
+    return fillTable
+end
+
+function NWT_fillCalcUtil:getProductionEntries(fillTable, farmId)
+    for _, production in pairs(g_currentMission.productionChainManager.productionPoints) do
+
+        if production.ownerFarmId == farmId then
+            for _, fillId in pairs(production.outputFillTypeIdsArray) do
+                local fillAmount = MathUtil.round(production.storage:getFillLevel(fillId))
+                local storageFillLevels = {}
+                storageFillLevels[fillId] = fillAmount
+                fillTable = self:fillEntryCalculator(fillTable, farmId, storageFillLevels)
+            end
 
         end
     end
@@ -145,7 +161,7 @@ function NWT_fillCalcUtil:fillEntryCalculator(fillTable, farmId, storageFillLeve
 
             if fillInfo.pricePerLiter ~= 0 then
                 local entryName = fillInfo.name
-                local details = math.floor(fillAmount + 0.5) .. "L x " .. g_i18n:formatMoney(fillInfo.pricePerLiter, 2, true, true)
+                local details = math.floor(fillAmount + 0.5)
                 local fillValue = fillAmount * fillInfo.pricePerLiter
 
                 local asset = nil
@@ -156,7 +172,7 @@ function NWT_fillCalcUtil:fillEntryCalculator(fillTable, farmId, storageFillLeve
 
                 else
                     asset = fillTable[fillId]
-                    asset.details = asset.details .. " | " .. details
+                    asset.details = asset.details + details
                     asset.entryAmount = asset.entryAmount + fillValue
 
                 end
