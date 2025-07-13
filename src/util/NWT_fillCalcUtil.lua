@@ -18,6 +18,9 @@ function NWT_fillCalcUtil:getFillEntries(entryTable, farmId)
     local fillTable = {}
     fillTable = self:getPlaceableFillEntries(fillTable, farmId)
     fillTable = self:getVehicleFillEntries(fillTable, farmId)
+    fillTable = self:getBaleFillEntries(fillTable, farmId)
+    -- todo
+    --     production chains
 
     for _, fillEntry in pairs(fillTable) do
         table.insert(entryTable, fillEntry)
@@ -26,31 +29,8 @@ function NWT_fillCalcUtil:getFillEntries(entryTable, farmId)
     return entryTable
 end
 
--- Calls implemention if found for each placeable to get entires for items in thier stock
-function NWT_fillCalcUtil:getPlaceableFillEntries(fillTable, farmId)
-    for _, placeable in ipairs(g_currentMission.placeableSystem.placeables) do
-        if placeable.ownerFarmId == farmId then
-
-            if placeable.specializationNames ~= nil then
-                for _, name in pairs(placeable.specializationNames) do
-                    local spec_name = "spec_" .. tostring(name)
-
-                    if placeableFillEntryImpls[spec_name] ~= nil then
-                        -- call spec impl based on table spec_name lookup
-                        local implFunction = placeableFillEntryImpls[spec_name]
-                        implFunction(fillTable, farmId, placeable)
-
-                    end
-                end
-            end
-        end
-    end
-
-    return fillTable
-end
-
 function NWT_fillCalcUtil:getVehicleFillEntries(fillTable, farmId)
-    for _, vehicle in ipairs(g_currentMission.vehicleSystem.vehicles) do
+    for _, vehicle in pairs(g_currentMission.vehicleSystem.vehicles) do
         if vehicle.ownerFarmId == farmId
             and vehicle.spec_fillUnit ~= nil
             and vehicle.propertyState == VehiclePropertyState.OWNED then
@@ -66,6 +46,46 @@ function NWT_fillCalcUtil:getVehicleFillEntries(fillTable, farmId)
 
             end
 
+        end
+    end
+
+    return fillTable
+end
+
+function NWT_fillCalcUtil:getBaleFillEntries(fillTable, farmId)
+    for _, obj in pairs(g_currentMission.itemSystem.itemsToSave) do
+        local bale = obj.item
+
+        if bale.isa ~= nil and bale:isa(Bale) and bale.ownerFarmId == farmId then
+            local fillId = bale.fillType
+            local fillAmount = bale.fillLevel
+            local storageFillLevels = {}
+            storageFillLevels[fillId] = fillAmount
+            fillTable = self:fillEntryCalculator(fillTable, farmId, storageFillLevels)
+
+        end
+    end
+
+    return fillTable
+end
+
+-- Calls implemention if found for each placeable to get entires for items in thier stock
+function NWT_fillCalcUtil:getPlaceableFillEntries(fillTable, farmId)
+    for _, placeable in pairs(g_currentMission.placeableSystem.placeables) do
+        if placeable.ownerFarmId == farmId then
+
+            if placeable.specializationNames ~= nil then
+                for _, name in pairs(placeable.specializationNames) do
+                    local spec_name = "spec_" .. tostring(name)
+
+                    if placeableFillEntryImpls[spec_name] ~= nil then
+                        -- call spec impl based on table spec_name lookup
+                        local implFunction = placeableFillEntryImpls[spec_name]
+                        implFunction(fillTable, farmId, placeable)
+
+                    end
+                end
+            end
         end
     end
 
@@ -105,6 +125,7 @@ function NWT_fillCalcUtil:bunkerSilo_FillCalculatorImpl(fillTable, farmId, place
         fillTable = self:fillEntryCalculator(fillTable, farmId, storageFillLevels)
 
     end
+
     return fillTable
 end
 
@@ -113,6 +134,7 @@ function NWT_fillCalcUtil:husbandry_FillCalculatorImpl(fillTable, farmId, placea
         local fillLevels = placeable.spec_husbandry.storage.fillLevels
         fillTable = self:fillEntryCalculator(fillTable, farmId, fillLevels)
     end
+
     return fillTable
 end
 
@@ -128,16 +150,12 @@ function NWT_fillCalcUtil:fillEntryCalculator(fillTable, farmId, storageFillLeve
 
                 local asset = nil
                 if fillTable[fillId] == nil then
-                    print("creating new asset")
                     asset = NWT_entry.new(g_currentMission:getIsServer(), g_currentMission:getIsClient())
                     asset:init(farmId, entryName, "Fill", details, fillValue)
                     asset:register()
 
                 else
                     asset = fillTable[fillId]
-                    print("updating asset")
-                    print("assetdetails " .. asset.details)
-                    print("assetAmount " .. asset.entryAmount)
                     asset.details = asset.details .. " | " .. details
                     asset.entryAmount = asset.entryAmount + fillValue
 
@@ -148,6 +166,6 @@ function NWT_fillCalcUtil:fillEntryCalculator(fillTable, farmId, storageFillLeve
             end
         end
     end
-    return fillTable
 
+    return fillTable
 end
