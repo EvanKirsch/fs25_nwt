@@ -15,7 +15,7 @@
             <ListItem profile="NWT_listItem" >
                 <Text profile="NWT_rowCellLeft" position="20px 0px" size="500px 20px" name="entryTitle"/>
                 <Text profile="NWT_rowCellLeft" position="500px 0px" size="200px 20px" name="entryCatagory"/>
-                <Text profile="NWT_rowCellLeft" position="800px 0px" size="200px 20px" name="entryDetails"/>
+                <Text profile="NWT_rowCellLeft" position="800px 0px" size="500px 20px" name="entryDetails"/>
                 <Text profile="NWT_rowCellRight" position="-20px 0px" size="500px 20px" name="entryAmount"/>
             </ListItem>
         </SmoothList>

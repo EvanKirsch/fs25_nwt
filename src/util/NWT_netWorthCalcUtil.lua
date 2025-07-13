@@ -29,7 +29,6 @@ function NWT_netWorthCalcUtil:getEntries(farmId)
     -- todo 
     --     livestock
     --     production chains
-    --     equipment fill stock
 
     return entryTable
 end
