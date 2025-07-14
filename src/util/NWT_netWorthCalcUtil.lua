@@ -17,10 +17,12 @@ function NWT_netWorthCalcUtil:getEntries(farmId)
     table.insert(entryTable, cashAsset)
 
     local loanAmount = self:calculateLoanAmount(farmId)
-    local loanAsset = NWT_entry.new(g_currentMission:getIsServer(), g_currentMission:getIsClient())
-    loanAsset:init(farmId, g_i18n:getText("table_loan"), "Loan", "", -1 * loanAmount)
-    loanAsset:register()
-    table.insert(entryTable, loanAsset)
+    if loanAmount > 0 then
+        local loanAsset = NWT_entry.new(g_currentMission:getIsServer(), g_currentMission:getIsClient())
+        loanAsset:init(farmId, g_i18n:getText("table_loan"), "Loan", "", -1 * loanAmount)
+        loanAsset:register()
+        table.insert(entryTable, loanAsset)
+    end
 
     entryTable = self:getEquipmentEntries(entryTable, farmId)
     entryTable = self:getFarmlandEntries(entryTable, farmId)
@@ -92,7 +94,7 @@ function NWT_netWorthCalcUtil:getLivestockEntries(entryTable, farmId)
             end
 
             if livestockValue ~= 0 then
-                local description = placeable:getName() .. " (" .. placeable.spec_husbandryAnimals.animalType.groupTitle .. ", " .. livestockNumber .. ")"
+                local description = placeable.spec_husbandryAnimals.animalType.groupTitle .. " (" .. placeable:getName() .. ", " .. livestockNumber .. ")"
 
                 local asset = NWT_entry.new(g_currentMission:getIsServer(), g_currentMission:getIsClient())
                 asset:init(farmId, description, "Livestock", livestockDetails, livestockValue)
