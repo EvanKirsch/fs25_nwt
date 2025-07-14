@@ -27,9 +27,6 @@ function NWT_netWorthCalcUtil:getEntries(farmId)
     entryTable = self:getPlaceableEntries(entryTable, farmId)
     entryTable = self:getLivestockEntries(entryTable, farmId)
     entryTable = NWT_fillCalcUtil:getFillEntries(entryTable, farmId)
-    -- todo 
-    --     livestock
-    --     nonplaceable production chain buildings?
 
     return entryTable
 end
