@@ -25,6 +25,7 @@ function NWT_netWorthCalcUtil:getEntries(farmId)
     entryTable = self:getEquipmentEntries(entryTable, farmId)
     entryTable = self:getFarmlandEntries(entryTable, farmId)
     entryTable = self:getPlaceableEntries(entryTable, farmId)
+    entryTable = self:getLivestockEntries(entryTable, farmId)
     entryTable = NWT_fillCalcUtil:getFillEntries(entryTable, farmId)
     -- todo 
     --     livestock
@@ -63,6 +64,45 @@ function NWT_netWorthCalcUtil:getPlaceableEntries(entryTable, farmId)
             asset:init(farmId, placeable:getName(), "Placeable", "", placeable:getSellPrice())
             asset:register()
             table.insert(entryTable, asset)
+
+        end
+    end
+
+    return entryTable
+end
+
+function NWT_netWorthCalcUtil:getLivestockEntries(entryTable, farmId)
+    for _, placeable in ipairs(g_currentMission.placeableSystem.placeables) do
+        if placeable.ownerFarmId == farmId
+            and placeable.spec_husbandryAnimals ~= nil then
+
+            local livestockValue = 0
+            local livestockNumber = 0
+            local livestockDetails = ""
+            for _, cluster in pairs(placeable.spec_husbandryAnimals.clusterSystem.clusters) do
+
+                local subType = g_currentMission.animalSystem.subTypes[cluster.subTypeIndex]
+                local unmodifiedPrice = subType.sellPrice:get(cluster.age)
+
+                -- todo - fix price calculations
+                local healthModifier = math.min(1, subType.healthThresholdFactor + (cluster.health / 100))
+                local modifiedPrice = healthModifier * unmodifiedPrice
+
+                livestockValue = livestockValue + (modifiedPrice * cluster.numAnimals)
+                livestockNumber = livestockNumber + cluster.numAnimals
+                livestockDetails = livestockDetails .. " | " .. cluster.numAnimals .. "x" .. modifiedPrice .. " " .. healthModifier
+
+            end
+
+            if livestockValue ~= 0 then
+                local description = placeable:getName() .. " (" .. placeable.spec_husbandryAnimals.animalType.groupTitle .. ", " .. livestockNumber .. ")"
+
+                local asset = NWT_entry.new(g_currentMission:getIsServer(), g_currentMission:getIsClient())
+                asset:init(farmId, description, "Livestock", livestockDetails, livestockValue)
+                asset:register()
+                table.insert(entryTable, asset)
+
+            end
 
         end
     end
