@@ -11,7 +11,7 @@
             <Button profile="NWT_inGameMenuHeaderRight" position="1250px 0px" size="280px 32px" text="$l10n_ui_header_value" handleFocus="false" />
         </GuiElement>
 
-        <SmoothList profile="NWT_list" size="100% 710px" id="entryTable" >
+        <SmoothList profile="NWT_list" size="100% 640px" id="entryTable" >
             <ListItem profile="NWT_listItem" >
                 <Text profile="NWT_rowCellLeft" position="20px 0px" size="500px 20px" name="entryTitle"/>
                 <Text profile="NWT_rowCellLeft" position="500px 0px" size="200px 20px" name="entryCatagory"/>
@@ -24,9 +24,24 @@
             <Slider profile="fs25_listSlider" dataElementId="entryTable"/>
         </ThreePartBitmap>
         <GuiElement profile="NWT_inGameMenuFooterBox">
-            <ThreePartBitmap profile="fs25_lineSeparatorTop" position="0px -15dp"/>
-            <Text profile="NWT_inGameMenuFooter" position="20px 0px" size="500px 20px" text="Total"/>
-            <Text profile="NWT_inGameMenuFooterRight" position="-20px 0px" size="500px 20px" id="netWorthTotalValue"/>
+
+            <ThreePartBitmap profile="fs25_lineSeparatorTop" position="0px 45px"/>
+            <Text profile="NWT_inGameMenuFooter" position="20px 80px" text="Net Cash"/>
+            <Text profile="NWT_inGameMenuFooterRight" position="-20px 80px" id="cashTotalValue"/>
+
+            <Text profile="NWT_inGameMenuFooter" position="20px 60px" text="Equipment"/>
+            <Text profile="NWT_inGameMenuFooterRight" position="-20px 60px" id="equipmentTotalValue"/>
+
+            <Text profile="NWT_inGameMenuFooter" position="20px 40px" text="Property"/>
+            <Text profile="NWT_inGameMenuFooterRight" position="-20px 40px" id="propertyTotalValue"/>
+
+            <Text profile="NWT_inGameMenuFooter" position="20px 20px" text="Inventory"/>
+            <Text profile="NWT_inGameMenuFooterRight" position="-20px 20px" id="inventoryTotalValue"/>
+
+            <ThreePartBitmap profile="fs25_lineSeparatorTop" position="0px -40px"/>
+
+            <Text profile="NWT_inGameMenuFooter" position="20px -5px" text="Total"/>
+            <Text profile="NWT_inGameMenuFooterRight" position="-20px -5px" id="netWorthTotalValue"/>
         </GuiElement>
     </GuiElement>
 
@@ -38,7 +53,7 @@
     
         <Profile name="NWT_inGameMenuSlider" extends="fs25_listSliderBox" with="anchorTopRight">
             <position value="28px -40px" />
-            <size value="6px 710px"/>
+            <size value="6px 640px"/>
         </Profile>
     
         <Profile name="NWT_inGameMenuHeader" extends="baseReference">
@@ -110,7 +125,7 @@
          </Profile>
 
         <Profile name="NWT_inGameMenuFooterBox" extends="baseReference" with="anchorBottomStretchingX">
-            <size value="100% 50px"/>
+            <size value="100% 100px"/>
         </Profile>
 
         <Profile name="NWT_inGameMenuFooter" extends="baseReference">

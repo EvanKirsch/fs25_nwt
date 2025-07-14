@@ -37,12 +37,39 @@ function NWT_inGameMenuNetWorthTracker:updateContent()
     local farmId = g_farmManager:getFarmByUserId(g_currentMission.playerUserId).farmId
     self.entryData = NWT_netWorthCalcUtil:getEntries(farmId)
 
+    local fCashTotalValue = 0
+    local fEquipmentTotalValue = 0
+    local fPropertyTotalValue = 0
+    local fInventoryTotalValue = 0
     local fNetWorthTotalValue = 0
-    for _, entry in pairs(self.entryData) do 
+    for _, entry in pairs(self.entryData) do
         fNetWorthTotalValue = fNetWorthTotalValue + entry.entryAmount
+
+        if entry.catagory == "Cash"
+            or entry.catagory == "Loan" then
+            fCashTotalValue = fCashTotalValue + entry.entryAmount
+
+        elseif entry.catagory == "Equipment" then
+            fEquipmentTotalValue = fEquipmentTotalValue + entry.entryAmount
+
+        elseif entry.catagory == "Farmland"
+            or entry.catagory == "Placeable" then
+            fPropertyTotalValue = fPropertyTotalValue + entry.entryAmount
+
+        elseif entry.catagory == "Fill"
+            or entry.catagory == "Livestock" then
+            fInventoryTotalValue = fInventoryTotalValue + entry.entryAmount
+
+        end
+
     end 
 
+    self.cashTotalValue:setText(g_i18n:formatMoney(fCashTotalValue, 0, true, true))
+    self.equipmentTotalValue:setText(g_i18n:formatMoney(fEquipmentTotalValue, 0, true, true))
+    self.propertyTotalValue:setText(g_i18n:formatMoney(fPropertyTotalValue, 0, true, true))
+    self.inventoryTotalValue:setText(g_i18n:formatMoney(fInventoryTotalValue, 0, true, true))
     self.netWorthTotalValue:setText(g_i18n:formatMoney(fNetWorthTotalValue, 0, true, true))
+
     self.entryTable:reloadData()
 end
 
