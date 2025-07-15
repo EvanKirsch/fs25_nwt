@@ -26,21 +26,21 @@
         <GuiElement profile="NWT_inGameMenuFooterBox">
 
             <ThreePartBitmap profile="fs25_lineSeparatorTop" position="0px 50px"/>
-            <Text profile="NWT_inGameMenuFooter" position="20px 85px" text="Net Cash"/>
+            <Text profile="NWT_inGameMenuFooter" position="20px 85px" text="$l10n_table_cat_cash"/>
             <Text profile="NWT_inGameMenuFooterRight" position="-20px 85px" id="cashTotalValue"/>
 
-            <Text profile="NWT_inGameMenuFooter" position="20px 65px" text="Equipment"/>
+            <Text profile="NWT_inGameMenuFooter" position="20px 65px" text="$l10n_table_cat_equipment"/>
             <Text profile="NWT_inGameMenuFooterRight" position="-20px 65px" id="equipmentTotalValue"/>
 
-            <Text profile="NWT_inGameMenuFooter" position="20px 45px" text="Property"/>
+            <Text profile="NWT_inGameMenuFooter" position="20px 45px" text="$l10n_table_cat_property"/>
             <Text profile="NWT_inGameMenuFooterRight" position="-20px 45px" id="propertyTotalValue"/>
 
-            <Text profile="NWT_inGameMenuFooter" position="20px 25px" text="Inventory"/>
+            <Text profile="NWT_inGameMenuFooter" position="20px 25px" text="$l10n_table_cat_inventory"/>
             <Text profile="NWT_inGameMenuFooterRight" position="-20px 25px" id="inventoryTotalValue"/>
 
             <ThreePartBitmap profile="fs25_lineSeparatorTop" position="0px -40px"/>
 
-            <Text profile="NWT_inGameMenuFooter" position="20px -5px" text="Total"/>
+            <Text profile="NWT_inGameMenuFooter" position="20px -5px" text="$l10n_ui_footer_total"/>
             <Text profile="NWT_inGameMenuFooterRight" position="-20px -5px" id="netWorthTotalValue"/>
         </GuiElement>
     </GuiElement>

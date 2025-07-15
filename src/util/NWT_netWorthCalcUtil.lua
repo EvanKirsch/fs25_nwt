@@ -10,16 +10,22 @@ NWT_netWorthCalcUtil._mt = Class(NWT_netWorthCalcUtil)
 function NWT_netWorthCalcUtil:getEntries(farmId)
     local entryTable = {}
 
+    local cashCatagory = g_i18n:getText("table_cat_cash")
+    local cashSubCatagory = g_i18n:getText("table_cash")
     local cashAmount = g_currentMission:getMoney()
+
     local cashAsset = NWT_entry.new(g_currentMission:getIsServer(), g_currentMission:getIsClient())
-    cashAsset:init(farmId, g_i18n:getText("table_cash"), "Cash", "", cashAmount)
+    cashAsset:init(farmId, cashSubCatagory, cashCatagory, cashSubCatagory, "", cashAmount)
     cashAsset:register()
     table.insert(entryTable, cashAsset)
 
     local loanAmount = self:calculateLoanAmount(farmId)
     if loanAmount > 0 then
+        local loanCatagory = g_i18n:getText("table_cat_cash")
+        local loanSubCatagory = g_i18n:getText("table_loan")
+
         local loanAsset = NWT_entry.new(g_currentMission:getIsServer(), g_currentMission:getIsClient())
-        loanAsset:init(farmId, g_i18n:getText("table_loan"), "Loan", "", -1 * loanAmount)
+        loanAsset:init(farmId, loanSubCatagory, loanCatagory, loanSubCatagory, "", -1 * loanAmount)
         loanAsset:register()
         table.insert(entryTable, loanAsset)
     end
@@ -45,7 +51,16 @@ function NWT_netWorthCalcUtil:getEquipmentEntries(entryTable, farmId)
             and vehicle.propertyState == VehiclePropertyState.OWNED then
 
             local vehicleAsset = NWT_entry.new(g_currentMission:getIsServer(), g_currentMission:getIsClient())
-            vehicleAsset:init(farmId, vehicle:getFullName(), "Equipment", "todo", vehicle:getSellPrice())
+            local vehicleCatagory = g_i18n:getText("table_cat_equipment")
+
+            local i = 0
+            if i == 0 then
+                print("--- Vehicle ---")
+                DebugUtil.printTableRecursively(vehicle)
+                i = i + 1
+            end
+
+            vehicleAsset:init(farmId, vehicle:getFullName(), vehicleCatagory, "TODO equipment subCat", "TODO equipment details", vehicle:getSellPrice())
             vehicleAsset:register()
             table.insert(entryTable, vehicleAsset)
 
@@ -59,8 +74,18 @@ function NWT_netWorthCalcUtil:getPlaceableEntries(entryTable, farmId)
     for _, placeable in ipairs(g_currentMission.placeableSystem.placeables) do
         if placeable.ownerFarmId == farmId then
 
+            local i = 0
+            if i == 0 then
+                print("--- Placeable ---")
+                DebugUtil.printTableRecursively(placeable)
+                i = i + 1
+            end
+
+            local assetCatagory = g_i18n:getText("table_cat_property")
+            local assetSubCatagory = g_i18n:getText("table_placeable")
+
             local asset = NWT_entry.new(g_currentMission:getIsServer(), g_currentMission:getIsClient())
-            asset:init(farmId, placeable:getName(), "Placeable", "", placeable:getSellPrice())
+            asset:init(farmId, placeable:getName(), assetCatagory, assetSubCatagory, "TODO placeable details", placeable:getSellPrice())
             asset:register()
             table.insert(entryTable, asset)
 
@@ -77,27 +102,28 @@ function NWT_netWorthCalcUtil:getLivestockEntries(entryTable, farmId)
 
             local livestockValue = 0
             local livestockNumber = 0
-            local livestockDetails = ""
             for _, cluster in pairs(placeable.spec_husbandryAnimals.clusterSystem.clusters) do
 
                 local subType = g_currentMission.animalSystem.subTypes[cluster.subTypeIndex]
                 local unmodifiedPrice = subType.sellPrice:get(cluster.age)
 
-                -- todo - fix price calculations
+                -- TODO - fix price calculations, incorrect for horses and not 100% healthy animals
                 local healthModifier = math.min(1, subType.healthThresholdFactor + (cluster.health / 100))
                 local modifiedPrice = healthModifier * unmodifiedPrice
 
                 livestockValue = livestockValue + (modifiedPrice * cluster.numAnimals)
                 livestockNumber = livestockNumber + cluster.numAnimals
-                livestockDetails = livestockDetails .. " | " .. cluster.numAnimals .. "x" .. modifiedPrice .. " " .. healthModifier
 
             end
 
             if livestockValue ~= 0 then
-                local description = placeable.spec_husbandryAnimals.animalType.groupTitle .. " (" .. placeable:getName() .. ", " .. livestockNumber .. ")"
+                local description = placeable.spec_husbandryAnimals.animalType.groupTitle
+                local assetDetails = placeable:getName() .. ", " .. livestockNumber .. " " .. description
+                local assetCatagory = g_i18n:getText("table_cat_inventory")
+                local assetSubCatagory = g_i18n:getText("table_livestock")
 
                 local asset = NWT_entry.new(g_currentMission:getIsServer(), g_currentMission:getIsClient())
-                asset:init(farmId, description, "Livestock", livestockDetails, livestockValue)
+                asset:init(farmId, description, assetCatagory, assetSubCatagory, assetDetails, livestockValue)
                 asset:register()
                 table.insert(entryTable, asset)
 
@@ -125,10 +151,15 @@ end
 function NWT_netWorthCalcUtil:getFarmlandEntries(entryTable, farmId)
     for _, farmland in pairs(g_farmlandManager:getFarmlands()) do
         if g_farmlandManager:getFarmlandOwner(farmland.id) == farmId then
-            local farmlandAsset = NWT_entry.new(g_currentMission:getIsServer(), g_currentMission:getIsClient())
-            farmlandAsset:init(farmId, "Farmland #" .. farmland.name, "Farmland", "", farmland.price)
-            farmlandAsset:register()
+            local assetCatagory = g_i18n:getText("table_cat_property")
+            local assetSubCatagory = g_i18n:getText("table_land")
+            local assetName = "Farmland #" .. farmland.name
+
+            local asset = NWT_entry.new(g_currentMission:getIsServer(), g_currentMission:getIsClient())
+            asset:init(farmId, assetName, assetCatagory, assetSubCatagory, "TODO - land details", farmland.price)
+            asset:register()
             table.insert(entryTable, farmlandAsset)
+
         end
     end
 

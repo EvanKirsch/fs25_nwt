@@ -42,22 +42,24 @@ function NWT_inGameMenuNetWorthTracker:updateContent()
     local fPropertyTotalValue = 0
     local fInventoryTotalValue = 0
     local fNetWorthTotalValue = 0
+
+    local catCash = g_i18n:getText("table_cat_cash")
+    local catEquipment = g_i18n:getText("table_cat_equipment")
+    local catProperty = g_i18n:getText("table_cat_property")
+    local catInventory = g_i18n:getText("table_cat_inventory")
     for _, entry in pairs(self.entryData) do
         fNetWorthTotalValue = fNetWorthTotalValue + entry.entryAmount
 
-        if entry.catagory == "Cash"
-            or entry.catagory == "Loan" then
+        if entry.catagory == catCash then
             fCashTotalValue = fCashTotalValue + entry.entryAmount
 
-        elseif entry.catagory == "Equipment" then
+        elseif entry.catagory == catEquipment then
             fEquipmentTotalValue = fEquipmentTotalValue + entry.entryAmount
 
-        elseif entry.catagory == "Farmland"
-            or entry.catagory == "Placeable" then
+        elseif entry.catagory == catProperty then
             fPropertyTotalValue = fPropertyTotalValue + entry.entryAmount
 
-        elseif entry.catagory == "Fill"
-            or entry.catagory == "Livestock" then
+        elseif entry.catagory == catInventory then
             fInventoryTotalValue = fInventoryTotalValue + entry.entryAmount
 
         end
@@ -88,7 +90,8 @@ end
 function NWT_inGameMenuNetWorthTracker:populateCellForItemInSection(list, section, index, cell)
     local loc_entryData = self.entryData[index]
     cell:getAttribute("entryTitle"):setText(loc_entryData.entryTitle)
-    cell:getAttribute("entryCatagory"):setText(loc_entryData.catagory)
+    local entryCatagory = loc_entryData.catagory .. " (" .. loc_entryData.subCatagory .. ")"
+    cell:getAttribute("entryCatagory"):setText(entryCatagory)
     cell:getAttribute("entryDetails"):setText(loc_entryData.details)
     cell:getAttribute("entryAmount"):setText(g_i18n:formatMoney(loc_entryData.entryAmount, 0, true, true))
 end
