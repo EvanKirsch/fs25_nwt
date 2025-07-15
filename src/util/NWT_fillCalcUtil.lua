@@ -156,14 +156,14 @@ function NWT_fillCalcUtil:fillEntryCalculator(fillTable, farmId, storageFillLeve
             local fillInfo = g_fillTypeManager.fillTypes[fillId]
 
             if fillInfo.pricePerLiter ~= 0 then
-                local entryName = fillInfo.name
+                local entryTitle = fillInfo.title
                 local details = math.floor(fillAmount + 0.5)
                 local fillValue = fillAmount * fillInfo.pricePerLiter
 
                 local asset = nil
                 if fillTable[fillId] == nil then
                     asset = NWT_entry.new(g_currentMission:getIsServer(), g_currentMission:getIsClient())
-                    asset:init(farmId, entryName, "Fill", details, fillValue)
+                    asset:init(farmId, entryTitle, "Fill", details, fillValue)
                     asset:register()
 
                 else
