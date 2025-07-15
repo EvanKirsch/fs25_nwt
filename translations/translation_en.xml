@@ -4,6 +4,7 @@
         <text name="ui_header_title" text="Farm Valuation"/>
         <text name="ui_header_lineitem" text="Line Item"/>
         <text name="ui_header_catagory" text="Catagory"/>
+        <text name="ui_header_details" text="Details"/>
         <text name="ui_header_value" text="Value"/>
         <text name="ui_footer_total" text="Total"/>
         <text name="table_cat_cash" text="Cash"/>

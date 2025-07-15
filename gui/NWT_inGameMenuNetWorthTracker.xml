@@ -8,6 +8,7 @@
         <GuiElement profile="fs25_statisticsHeaderBox">
             <Button profile="NWT_inGameMenuHeader" position="20px 0px" text="$l10n_ui_header_lineitem" handleFocus="false" />
             <Button profile="NWT_inGameMenuHeader" position="500px 0px" text="$l10n_ui_header_catagory" handleFocus="false" />
+            <Button profile="NWT_inGameMenuHeader" position="800px 0px" text="$l10n_ui_header_details" handleFocus="false" />
             <Button profile="NWT_inGameMenuHeaderRight" position="1250px 0px" size="280px 32px" text="$l10n_ui_header_value" handleFocus="false" />
         </GuiElement>
 
