@@ -32,17 +32,13 @@ function NWT_fillCalcUtil:getVehicleFillEntries(fillTable, farmId)
     for _, vehicle in pairs(g_currentMission.vehicleSystem.vehicles) do
         if vehicle.ownerFarmId == farmId
             and vehicle.spec_fillUnit ~= nil
+            and vehicle.spec_fillUnit.fillUnits ~= nil -- nullable even in fillUnit spec?
             and vehicle.propertyState == VehiclePropertyState.OWNED then
 
-            if vehicle.spec_fillUnit.fillUnits ~= nil
-                and vehicle.spec_fillUnit.fillUnits[1] ~= nil then
-
-                local fillId = vehicle.spec_fillUnit.fillUnits[1].fillType
-                local fillAmount = vehicle.spec_fillUnit.fillUnits[1].fillLevel
-                local storageFillLevels = {}
-                storageFillLevels[fillId] = fillAmount
-                fillTable = self:fillEntryCalculator(fillTable, farmId, storageFillLevels)
-
+            for _, fillUnit in pairs(vehicle.spec_fillUnit.fillUnits) do
+                 local storageFillLevels = {}
+                 storageFillLevels[fillUnit.fillType] = fillUnit.fillLevel
+                 fillTable = self:fillEntryCalculator(fillTable, farmId, storageFillLevels)
             end
 
         end
