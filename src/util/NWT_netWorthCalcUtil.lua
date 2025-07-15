@@ -149,8 +149,9 @@ function NWT_netWorthCalcUtil:getFarmlandEntries(entryTable, farmId)
             local assetSubCatagory = g_i18n:getText("table_land")
             local assetName = "Farmland #" .. farmland.name
 
+            -- TODO - add support acres
             local asset = NWT_entry.new(g_currentMission:getIsServer(), g_currentMission:getIsClient())
-            asset:init(farmId, assetName, assetCatagory, assetSubCatagory, "", farmland.price)
+            asset:init(farmId, assetName, assetCatagory, assetSubCatagory, "Size: " .. farmland.areaInHa .. " Ha", farmland.price)
             asset:register()
             table.insert(entryTable, asset)
 

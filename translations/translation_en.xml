@@ -13,7 +13,7 @@
         <text name="table_cat_inventory" text="Inventory"/>
         <text name="table_cash" text="Cash"/>
         <text name="table_loan" text="Loan"/>
-        <text name="table_placeable" text="Placeable"/>
+        <text name="table_placeable" text="Building"/>
         <text name="table_livestock" text="Livestock"/>
         <text name="table_fill" text="Fill"/>
         <text name="table_land" text="Farmland"/>
