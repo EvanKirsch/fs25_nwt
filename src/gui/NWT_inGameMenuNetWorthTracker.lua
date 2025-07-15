@@ -90,8 +90,25 @@ end
 function NWT_inGameMenuNetWorthTracker:populateCellForItemInSection(list, section, index, cell)
     local loc_entryData = self.entryData[index]
     cell:getAttribute("entryTitle"):setText(loc_entryData.entryTitle)
-    local entryCatagory = loc_entryData.catagory .. " (" .. loc_entryData.subCatagory .. ")"
+
+    local entryCatagory = tostring(loc_entryData.catagory)
+    if loc_entryData.subCatagory ~= nil
+        and loc_entryData.subCatagory ~= "" then
+        entryCatagory = entryCatagory .. " (" .. tostring(loc_entryData.subCatagory) .. ")"
+
+    end
     cell:getAttribute("entryCatagory"):setText(entryCatagory)
-    cell:getAttribute("entryDetails"):setText(loc_entryData.details)
+
+    local entryDetails = tostring(loc_entryData.details)
+    local subCatFill = g_i18n:getText("table_fill")
+    if loc_entryData.details ~= nil
+        and loc_entryData.subCatagory ~= nil
+        and loc_entryData.subCatagory == subCatFill then
+        -- TODO - formats tree saplings funky
+        entryDetails = g_i18n:formatVolume(loc_entryData.details, 0)
+
+    end
+    cell:getAttribute("entryDetails"):setText(entryDetails)
+
     cell:getAttribute("entryAmount"):setText(g_i18n:formatMoney(loc_entryData.entryAmount, 0, true, true))
 end

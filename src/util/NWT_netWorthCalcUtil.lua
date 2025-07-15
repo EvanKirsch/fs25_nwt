@@ -50,19 +50,19 @@ function NWT_netWorthCalcUtil:getEquipmentEntries(entryTable, farmId)
             and vehicle.typeName ~= "bigBag"            -- exclude spawned big bags
             and vehicle.propertyState == VehiclePropertyState.OWNED then
 
-            local vehicleAsset = NWT_entry.new(g_currentMission:getIsServer(), g_currentMission:getIsClient())
-            local vehicleCatagory = g_i18n:getText("table_cat_equipment")
-
-            local i = 0
-            if i == 0 then
-                print("--- Vehicle ---")
-                DebugUtil.printTableRecursively(vehicle)
-                i = i + 1
+            local assetCatagory = g_i18n:getText("table_cat_equipment")
+            local vehicleConfig = g_storeManager:getItemByXMLFilename(vehicle.configFileName)
+            local assetSubCatagory = nil
+            if vehicleConfig ~= nil then
+                assetSubCatagory = g_storeManager:getCategoryByName(vehicleConfig.categoryName).title
             end
 
-            vehicleAsset:init(farmId, vehicle:getFullName(), vehicleCatagory, "TODO equipment subCat", "TODO equipment details", vehicle:getSellPrice())
-            vehicleAsset:register()
-            table.insert(entryTable, vehicleAsset)
+            local asset = NWT_entry.new(g_currentMission:getIsServer(), g_currentMission:getIsClient())
+
+
+            asset:init(farmId, vehicle:getFullName(), assetCatagory, assetSubCatagory, "TODO equipment details", vehicle:getSellPrice())
+            asset:register()
+            table.insert(entryTable, asset)
 
         end
     end
@@ -74,12 +74,12 @@ function NWT_netWorthCalcUtil:getPlaceableEntries(entryTable, farmId)
     for _, placeable in ipairs(g_currentMission.placeableSystem.placeables) do
         if placeable.ownerFarmId == farmId then
 
-            local i = 0
-            if i == 0 then
-                print("--- Placeable ---")
-                DebugUtil.printTableRecursively(placeable)
-                i = i + 1
-            end
+            -- local i = 0
+            -- if i == 0 then
+            --     print("--- Placeable ---")
+            --     DebugUtil.printTableRecursively(placeable)
+            --     i = i + 1
+            -- end
 
             local assetCatagory = g_i18n:getText("table_cat_property")
             local assetSubCatagory = g_i18n:getText("table_placeable")
@@ -158,7 +158,7 @@ function NWT_netWorthCalcUtil:getFarmlandEntries(entryTable, farmId)
             local asset = NWT_entry.new(g_currentMission:getIsServer(), g_currentMission:getIsClient())
             asset:init(farmId, assetName, assetCatagory, assetSubCatagory, "TODO - land details", farmland.price)
             asset:register()
-            table.insert(entryTable, farmlandAsset)
+            table.insert(entryTable, asset)
 
         end
     end
