@@ -56,7 +56,7 @@ function NWT_netWorthCalcUtil:getEquipmentEntries(entryTable, farmId)
             if vehicleConfig ~= nil then
                 assetSubCatagory = g_storeManager:getCategoryByName(vehicleConfig.categoryName).title
             end
-            local vehicleAgeTxt = g_i18n:getText("details_age") .. ": " .. vehicle.age .. " " .. g_i18n:getText("details_age_unit")
+            local vehicleAgeTxt = g_i18n:getText("details_age") .. ": " .. self:getFormatedAge(vehicle.age)
             local vehicleHoursTxt = g_i18n:getText("details_operating_time") .. ": " .. math.floor((vehicle.operatingTime / 1000 / 60 / 60) + .5)
             local assetDetails = vehicleAgeTxt .. ", " .. vehicleHoursTxt
 
@@ -76,7 +76,7 @@ function NWT_netWorthCalcUtil:getPlaceableEntries(entryTable, farmId)
         if placeable.ownerFarmId == farmId then
             local assetCatagory = g_i18n:getText("table_cat_property")
             local assetSubCatagory = g_i18n:getText("table_placeable")
-            local assetDetails = g_i18n:getText("details_age") .. ": "  .. placeable.age .. " " .. g_i18n:getText("details_age_unit")
+            local assetDetails = g_i18n:getText("details_age") .. ": "  .. self:getFormatedAge(placeable.age)
 
             local asset = NWT_entry.new(g_currentMission:getIsServer(), g_currentMission:getIsClient())
             asset:init(farmId, placeable:getName(), assetCatagory, assetSubCatagory, assetDetails, placeable:getSellPrice())
@@ -148,10 +148,11 @@ function NWT_netWorthCalcUtil:getFarmlandEntries(entryTable, farmId)
             local assetCatagory = g_i18n:getText("table_cat_property")
             local assetSubCatagory = g_i18n:getText("table_land")
             local assetName = "Farmland #" .. farmland.name
+            local assetDetails = "Size: " .. string.format("%.2f", farmland.areaInHa) .. " Ha"
 
             -- TODO - add support acres
             local asset = NWT_entry.new(g_currentMission:getIsServer(), g_currentMission:getIsClient())
-            asset:init(farmId, assetName, assetCatagory, assetSubCatagory, "Size: " .. farmland.areaInHa .. " Ha", farmland.price)
+            asset:init(farmId, assetName, assetCatagory, assetSubCatagory, assetDetails, farmland.price)
             asset:register()
             table.insert(entryTable, asset)
 
@@ -159,4 +160,15 @@ function NWT_netWorthCalcUtil:getFarmlandEntries(entryTable, farmId)
     end
 
     return entryTable
+end
+
+function NWT_netWorthCalcUtil:getFormatedAge(age)
+    local unit = g_i18n:getText("details_age_month_unit")
+    if age > 12 then
+        age = string.format("%.1f", (age/12))
+        unit = g_i18n:getText("details_age_year_unit")
+
+    end
+
+    return age .. " " .. unit
 end

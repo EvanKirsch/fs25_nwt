@@ -18,7 +18,8 @@
         <text name="table_fill" text="Fill"/>
         <text name="table_land" text="Farmland"/>
         <text name="details_age" text="Age"/>
-        <text name="details_age_unit" text="Months"/>
+        <text name="details_age_month_unit" text="Months"/>
+        <text name="details_age_year_unit" text="Years"/>
         <text name="details_operating_time" text="Hours"/>
     </texts>
 </l10n>
