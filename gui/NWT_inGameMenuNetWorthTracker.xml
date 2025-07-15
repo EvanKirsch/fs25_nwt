@@ -7,15 +7,15 @@
 
         <GuiElement profile="fs25_statisticsHeaderBox">
             <Button profile="NWT_inGameMenuHeader" position="20px 0px" text="$l10n_ui_header_lineitem" handleFocus="false" />
-            <Button profile="NWT_inGameMenuHeader" position="500px 0px" text="$l10n_ui_header_catagory" handleFocus="false" />
+            <Button profile="NWT_inGameMenuHeader" position="400px 0px" text="$l10n_ui_header_catagory" handleFocus="false" />
             <Button profile="NWT_inGameMenuHeader" position="800px 0px" text="$l10n_ui_header_details" handleFocus="false" />
             <Button profile="NWT_inGameMenuHeaderRight" position="1250px 0px" size="280px 32px" text="$l10n_ui_header_value" handleFocus="false" />
         </GuiElement>
 
         <SmoothList profile="NWT_list" size="100% 640px" id="entryTable" >
             <ListItem profile="NWT_listItem" >
-                <Text profile="NWT_rowCellLeft" position="20px 0px" size="500px 20px" name="entryTitle"/>
-                <Text profile="NWT_rowCellLeft" position="500px 0px" size="200px 20px" name="entryCatagory"/>
+                <Text profile="NWT_rowCellLeft" position="20px 0px" size="300px 20px" name="entryTitle"/>
+                <Text profile="NWT_rowCellLeft" position="400px 0px" size="300px 20px" name="entryCatagory"/>
                 <Text profile="NWT_rowCellLeft" position="800px 0px" size="500px 20px" name="entryDetails"/>
                 <Text profile="NWT_rowCellRight" position="-20px 0px" size="500px 20px" name="entryAmount"/>
             </ListItem>
