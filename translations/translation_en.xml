@@ -17,5 +17,7 @@
         <text name="table_livestock" text="Livestock"/>
         <text name="table_fill" text="Fill"/>
         <text name="table_land" text="Farmland"/>
+        <text name="details_age" text="Age"/>
+        <text name="details_age_unit" text="Months"/>
     </texts>
 </l10n>
