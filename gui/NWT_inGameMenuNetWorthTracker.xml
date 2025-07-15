@@ -6,10 +6,22 @@
         </GuiElement>
 
         <GuiElement profile="fs25_statisticsHeaderBox">
-            <Button profile="NWT_inGameMenuHeader" position="20px 0px" text="$l10n_ui_header_lineitem" handleFocus="false" />
-            <Button profile="NWT_inGameMenuHeader" position="400px 0px" text="$l10n_ui_header_catagory" handleFocus="false" />
-            <Button profile="NWT_inGameMenuHeader" position="800px 0px" text="$l10n_ui_header_details" handleFocus="false" />
-            <Button profile="NWT_inGameMenuHeaderRight" position="1250px 0px" size="280px 32px" text="$l10n_ui_header_value" handleFocus="false" />
+            <Button profile="NWT_inGameMenuHeader" position="20px 0px" text="$l10n_ui_header_lineitem" onClick="onClickLineItemSort">
+                <Bitmap profile="fs25_vehiclesHeaderIconSortAscending" visible="false" position="-10px 0px" id="iconLineItemAscending" />
+                <Bitmap profile="fs25_vehiclesHeaderIconSortDescending" visible="false" position="-10px 0px" id="iconLineItemDescending" />
+            </Button>
+            <Button profile="NWT_inGameMenuHeader" position="400px 0px" text="$l10n_ui_header_catagory" onClick="onClickCatagorySort">
+                <Bitmap profile="fs25_vehiclesHeaderIconSortAscending" visible="false" position="-10px 0px" id="iconCatagoryAscending" />
+                <Bitmap profile="fs25_vehiclesHeaderIconSortDescending" visible="false" position="-10px 0px" id="iconCatagoryDescending" />
+            </Button>
+            <Button profile="NWT_inGameMenuHeader" position="800px 0px" text="$l10n_ui_header_details" onClick="onClickDetailsSort">
+                <Bitmap profile="fs25_vehiclesHeaderIconSortAscending" visible="false" position="-10px 0px" id="iconDetailsAscending" />
+                <Bitmap profile="fs25_vehiclesHeaderIconSortDescending" visible="false" position="-10px 0px" id="iconDetailsDescending" />
+            </Button>
+            <Button profile="NWT_inGameMenuHeaderRight" position="1250px 0px" size="280px 32px" text="$l10n_ui_header_value" onClick="onClickValueSort">
+                <Bitmap profile="fs25_vehiclesHeaderIconSortAscending" visible="false" position="-10px 0px" id="iconValueAscending" />
+                <Bitmap profile="fs25_vehiclesHeaderIconSortDescending" visible="false" position="-10px 0px" id="iconValueDescending" />
+            </Button>
         </GuiElement>
 
         <SmoothList profile="NWT_list" size="100% 640px" id="entryTable" >

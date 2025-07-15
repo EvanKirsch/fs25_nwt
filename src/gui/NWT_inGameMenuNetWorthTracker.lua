@@ -112,3 +112,93 @@ function NWT_inGameMenuNetWorthTracker:populateCellForItemInSection(list, sectio
 
     cell:getAttribute("entryAmount"):setText(g_i18n:formatMoney(loc_entryData.entryAmount, 0, true, true))
 end
+
+local lineItemSort = 0
+local catagorySort = 0
+local detailsSort = 0
+local valueSort = 0
+
+-- empty table of fuctions to build sorter
+local sortFunctions = {}
+
+function NWT_inGameMenuNetWorthTracker:onClickLineItemSort(entry)
+    print("---- onClickLineItemSort ---")
+    self:playSample(GuiSoundPlayer.SOUND_SAMPLES.CLICK)
+
+    lineItemSort = (lineItemSort + 1) % 3
+    if lineItemSort == 0 then
+        self.iconLineItemAscending:setVisible(false)
+        self.iconLineItemDescending:setVisible(false)
+
+    elseif lineItemSort == 1 then
+        self.iconLineItemAscending:setVisible(true)
+        self.iconLineItemDescending:setVisible(false)
+
+    elseif lineItemSort == 2 then
+        self.iconLineItemAscending:setVisible(false)
+        self.iconLineItemDescending:setVisible(true)
+
+    end
+end
+
+function NWT_inGameMenuNetWorthTracker:onClickCatagorySort(entry)
+    print("---- onClickLineItemSort ---")
+    self:playSample(GuiSoundPlayer.SOUND_SAMPLES.CLICK)
+
+    catagorySort = (catagorySort + 1) % 3
+    if catagorySort == 0 then
+        self.iconCatagoryAscending:setVisible(false)
+        self.iconCatagoryDescending:setVisible(false)
+
+    elseif catagorySort == 1 then
+        self.iconCatagoryAscending:setVisible(true)
+        self.iconCatagoryDescending:setVisible(false)
+
+    elseif catagorySort == 2 then
+        self.iconCatagoryAscending:setVisible(false)
+        self.iconCatagoryDescending:setVisible(true)
+
+    end
+end
+
+function NWT_inGameMenuNetWorthTracker:onClickDetailsSort(entry)
+    print("--- onClickDetailsSort ---")
+    self:playSample(GuiSoundPlayer.SOUND_SAMPLES.CLICK)
+
+    detailsSort = (detailsSort + 1) % 3
+    if detailsSort == 0 then
+        self.iconDetailsAscending:setVisible(false)
+        self.iconDetailsDescending:setVisible(false)
+
+    elseif detailsSort == 1 then
+        self.iconDetailsAscending:setVisible(true)
+        self.iconDetailsDescending:setVisible(false)
+
+    elseif detailsSort == 2 then
+        self.iconDetailsAscending:setVisible(false)
+        self.iconDetailsDescending:setVisible(true)
+
+    end
+
+end
+
+function NWT_inGameMenuNetWorthTracker:onClickValueSort(entry)
+    print("--- onClickValueSort ---")
+    self:playSample(GuiSoundPlayer.SOUND_SAMPLES.CLICK)
+
+    valueSort = (valueSort + 1) % 3
+    if valueSort == 0 then
+        self.iconValueAscending:setVisible(false)
+        self.iconValueDescending:setVisible(false)
+
+    elseif valueSort == 1 then
+        self.iconValueAscending:setVisible(true)
+        self.iconValueDescending:setVisible(false)
+
+    elseif valueSort then
+        self.iconValueAscending:setVisible(false)
+        self.iconValueDescending:setVisible(true)
+
+    end
+
+end
