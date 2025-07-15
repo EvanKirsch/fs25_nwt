@@ -19,5 +19,6 @@
         <text name="table_land" text="Farmland"/>
         <text name="details_age" text="Age"/>
         <text name="details_age_unit" text="Months"/>
+        <text name="details_operating_time" text="Hours"/>
     </texts>
 </l10n>

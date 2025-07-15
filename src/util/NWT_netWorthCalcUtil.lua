@@ -56,11 +56,12 @@ function NWT_netWorthCalcUtil:getEquipmentEntries(entryTable, farmId)
             if vehicleConfig ~= nil then
                 assetSubCatagory = g_storeManager:getCategoryByName(vehicleConfig.categoryName).title
             end
+            local vehicleAgeTxt = g_i18n:getText("details_age") .. ": " .. vehicle.age .. " " .. g_i18n:getText("details_age_unit")
+            local vehicleHoursTxt = g_i18n:getText("details_operating_time") .. ": " .. math.floor((vehicle.operatingTime / 1000 / 60 / 60) + .5)
+            local assetDetails = vehicleAgeTxt .. ", " .. vehicleHoursTxt
 
             local asset = NWT_entry.new(g_currentMission:getIsServer(), g_currentMission:getIsClient())
-
-
-            asset:init(farmId, vehicle:getFullName(), assetCatagory, assetSubCatagory, "", vehicle:getSellPrice())
+            asset:init(farmId, vehicle:getFullName(), assetCatagory, assetSubCatagory, assetDetails, vehicle:getSellPrice())
             asset:register()
             table.insert(entryTable, asset)
 
