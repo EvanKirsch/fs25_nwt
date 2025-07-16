@@ -14,11 +14,11 @@ function NWT_entry.new(isServer, isClient, customMt)
     return self
 end
 
-function NWT_entry:init(farmId, title, catagory, subCatagory, details, amount)
+function NWT_entry:init(farmId, title, category, subCategory, details, amount)
     self.farmId = farmId
     self.entryTitle = title
-    self.catagory = catagory
-    self.subCatagory = subCatagory
+    self.category = category
+    self.subCategory = subCategory
     self.details = details
     self.entryAmount = amount
 end

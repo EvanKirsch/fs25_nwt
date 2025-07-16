@@ -50,16 +50,16 @@ function NWT_inGameMenuNetWorthTracker:updateContent()
     for _, entry in pairs(self.entryData) do
         fNetWorthTotalValue = fNetWorthTotalValue + entry.entryAmount
 
-        if entry.catagory == catCash then
+        if entry.category == catCash then
             fCashTotalValue = fCashTotalValue + entry.entryAmount
 
-        elseif entry.catagory == catEquipment then
+        elseif entry.category == catEquipment then
             fEquipmentTotalValue = fEquipmentTotalValue + entry.entryAmount
 
-        elseif entry.catagory == catProperty then
+        elseif entry.category == catProperty then
             fPropertyTotalValue = fPropertyTotalValue + entry.entryAmount
 
-        elseif entry.catagory == catInventory then
+        elseif entry.category == catInventory then
             fInventoryTotalValue = fInventoryTotalValue + entry.entryAmount
 
         end
@@ -91,19 +91,19 @@ function NWT_inGameMenuNetWorthTracker:populateCellForItemInSection(list, sectio
     local loc_entryData = self.entryData[index]
     cell:getAttribute("entryTitle"):setText(loc_entryData.entryTitle)
 
-    local entryCatagory = tostring(loc_entryData.catagory)
-    if loc_entryData.subCatagory ~= nil
-        and loc_entryData.subCatagory ~= "" then
-        entryCatagory = entryCatagory .. " (" .. tostring(loc_entryData.subCatagory) .. ")"
+    local entryCategory = tostring(loc_entryData.category)
+    if loc_entryData.subCategory ~= nil
+        and loc_entryData.subCategory ~= "" then
+        entryCategory = entryCategory .. " (" .. tostring(loc_entryData.subCategory) .. ")"
 
     end
-    cell:getAttribute("entryCatagory"):setText(entryCatagory)
+    cell:getAttribute("entryCategory"):setText(entryCategory)
 
     local entryDetails = tostring(loc_entryData.details)
     local subCatFill = g_i18n:getText("table_fill")
     if loc_entryData.details ~= nil
-        and loc_entryData.subCatagory ~= nil
-        and loc_entryData.subCatagory == subCatFill then
+        and loc_entryData.subCategory ~= nil
+        and loc_entryData.subCategory == subCatFill then
         -- TODO - formats tree saplings funky
         entryDetails = g_i18n:formatVolume(loc_entryData.details, 0)
 
@@ -115,7 +115,7 @@ end
 
 -- counters to track current status of sorting
 local lineItemSort = 0
-local catagorySort = 0
+local categorySort = 0
 local valueSort = 0
 
 
@@ -140,23 +140,23 @@ function NWT_inGameMenuNetWorthTracker:onClickLineItemSort(entry)
     self.entryTable:reloadData()
 end
 
-function NWT_inGameMenuNetWorthTracker:onClickCatagorySort(entry)
+function NWT_inGameMenuNetWorthTracker:onClickCategorySort(entry)
     print("---- onClickLineItemSort ---")
     self:playSample(GuiSoundPlayer.SOUND_SAMPLES.CLICK)
     self:hideSortIcons()
 
     local sortFunction
-    catagorySort = (catagorySort + 1) % 2
-    if catagorySort == 0 then
-        self.iconCatagoryAscending:setVisible(true)
+    categorySort = (categorySort + 1) % 2
+    if categorySort == 0 then
+        self.iconCategoryAscending:setVisible(true)
         sortFunction = function (a, b)
-            return a.catagory .. tostring(a.subCatagory) < b.catagory .. tostring(b.subCatagory)
+            return a.category .. tostring(a.subCategory) < b.category .. tostring(b.subCategory)
         end
 
-    elseif catagorySort == 1 then
-        self.iconCatagoryDescending:setVisible(true)
+    elseif categorySort == 1 then
+        self.iconCategoryDescending:setVisible(true)
         sortFunction = function (a, b)
-            return a.catagory .. tostring(a.subCatagory) > b.catagory .. tostring(b.subCatagory)
+            return a.category .. tostring(a.subCategory) > b.category .. tostring(b.subCategory)
         end
 
     end
@@ -191,8 +191,8 @@ function NWT_inGameMenuNetWorthTracker:hideSortIcons()
         self.iconLineItemAscending:setVisible(false)
         self.iconLineItemDescending:setVisible(false)
 
-        self.iconCatagoryAscending:setVisible(false)
-        self.iconCatagoryDescending:setVisible(false)
+        self.iconCategoryAscending:setVisible(false)
+        self.iconCategoryDescending:setVisible(false)
 
         self.iconValueAscending:setVisible(false)
         self.iconValueDescending:setVisible(false)
