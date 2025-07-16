@@ -149,13 +149,15 @@ function NWT_inGameMenuNetWorthTracker:onClickCatagorySort(entry)
     catagorySort = (catagorySort + 1) % 2
     if catagorySort == 0 then
         self.iconCatagoryAscending:setVisible(true)
-        -- TODO - amend impl w/ subcatagories
-        sortFunction = function (a, b) return a.catagory < b.catagory end
+        sortFunction = function (a, b)
+            return a.catagory .. tostring(a.subCatagory) < b.catagory .. tostring(b.subCatagory)
+        end
 
     elseif catagorySort == 1 then
         self.iconCatagoryDescending:setVisible(true)
-        -- TODO - amend impl w/ subcatagories
-        sortFunction = function (a, b) return a.catagory > b.catagory end
+        sortFunction = function (a, b)
+            return a.catagory .. tostring(a.subCatagory) > b.catagory .. tostring(b.subCatagory)
+        end
 
     end
 
