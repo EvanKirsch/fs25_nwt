@@ -73,7 +73,7 @@ end
 
 function NWT_netWorthCalcUtil:getPlaceableEntries(entryTable, farmId)
     for _, placeable in ipairs(g_currentMission.placeableSystem.placeables) do
-        if placeable.ownerFarmId == farmId then
+        if placeable.ownerFarmId == farmId and placeable:getSellPrice() ~= 0 then
             local assetCatagory = g_i18n:getText("table_cat_property")
             local assetSubCatagory = g_i18n:getText("table_placeable")
             local assetDetails = g_i18n:getText("details_age") .. ": "  .. self:getFormatedAge(placeable.age)
