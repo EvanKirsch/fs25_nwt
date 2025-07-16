@@ -84,7 +84,8 @@ end
 -- Calls implemention if found for each placeable to get entires for items in thier stock
 function NWT_fillCalcUtil:getPlaceableFillEntries(fillTable, farmId)
     for _, placeable in pairs(g_currentMission.placeableSystem.placeables) do
-        if placeable.ownerFarmId == farmId then
+        if placeable.ownerFarmId == farmId
+            or placeable.ownerFarmId == 0 then -- common placeables : ex: train station silo
 
             if placeable.specializationNames ~= nil then
                 for _, name in pairs(placeable.specializationNames) do
