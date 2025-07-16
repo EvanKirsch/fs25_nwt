@@ -1,17 +1,28 @@
 ﻿<?xml version="4.0" encoding="utf-8" standalone="no" ?>
-<modDesc descVersion="96" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://validation.gdn.giants-software.com/xml/fs25/modDesc.xsd">
+<modDesc descVersion="95" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://validation.gdn.giants-software.com/xml/fs25/modDesc.xsd">
   <author>Evan Kirsch</author>	
   <version>1.0.0.0</version>    
 	<title>
       <en>Net Worth Tracker</en>
-    </title>    
+  </title>
   <description>
-    <en><![CDATA[Net Worth Tracker]]></en>		
+    <en><![CDATA[
+    Description: Adds menu screen to sumarize the farms total value
+    GitHub link: https://github.com/EvanKirsch/fs25_nwt
+    ]]></en>
+    <de><![CDATA[
+    Beschreibung: Fügt einen Menübildschirm hinzu, um den Gesamtwert der Farm zusammenzufassen
+    GitHub-Link: https://github.com/EvanKirsch/fs25_nwt
+    ]]></de>
   </description>    
 	<iconFilename>icon_NetWorthTracker.dds</iconFilename>
 	<l10n filenamePrefix="translations/translation" />
   <multiplayer supported="false"/>	
-	<extraSourceFiles>	
-        <sourceFile filename="src/NWT_netWorthTracker.lua" /> 
+	<extraSourceFiles>
+        <sourceFile filename="src/NWT_netWorthTracker.lua" />
+        <sourceFile filename="src/util/NWT_fillCalcUtil.lua" />
+        <sourceFile filename="src/util/NWT_netWorthCalcUtil.lua" />
+        <sourceFile filename="src/gui/NWT_inGameMenuNetWorthTracker.lua" />
+        <sourceFile filename="src/model/NWT_entry.lua" />
 	</extraSourceFiles>
 </modDesc>
