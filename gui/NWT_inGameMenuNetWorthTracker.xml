@@ -14,10 +14,7 @@
                 <Bitmap profile="fs25_vehiclesHeaderIconSortAscending" visible="false" position="-10px 0px" id="iconCatagoryAscending" />
                 <Bitmap profile="fs25_vehiclesHeaderIconSortDescending" visible="false" position="-10px 0px" id="iconCatagoryDescending" />
             </Button>
-            <Button profile="NWT_inGameMenuHeader" position="800px 0px" text="$l10n_ui_header_details" onClick="onClickDetailsSort">
-                <Bitmap profile="fs25_vehiclesHeaderIconSortAscending" visible="false" position="-10px 0px" id="iconDetailsAscending" />
-                <Bitmap profile="fs25_vehiclesHeaderIconSortDescending" visible="false" position="-10px 0px" id="iconDetailsDescending" />
-            </Button>
+            <Button profile="NWT_inGameMenuHeader" position="800px 0px" text="$l10n_ui_header_details" handleFocus="false" />
             <Button profile="NWT_inGameMenuHeaderRight" position="1250px 0px" size="280px 32px" text="$l10n_ui_header_value" onClick="onClickValueSort">
                 <Bitmap profile="fs25_vehiclesHeaderIconSortAscending" visible="false" position="-10px 0px" id="iconValueAscending" />
                 <Bitmap profile="fs25_vehiclesHeaderIconSortDescending" visible="false" position="-10px 0px" id="iconValueDescending" />
