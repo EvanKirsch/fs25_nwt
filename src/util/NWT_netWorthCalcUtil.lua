@@ -57,7 +57,8 @@ function NWT_netWorthCalcUtil:getEquipmentEntries(entryTable, farmId)
                 assetSubCategory = g_storeManager:getCategoryByName(vehicleConfig.categoryName).title
             end
             local vehicleAgeTxt = g_i18n:getText("details_age") .. ": " .. self:getFormatedAge(vehicle.age)
-            local vehicleHoursTxt = g_i18n:getText("details_operating_time") .. ": " .. math.floor((vehicle.operatingTime / 1000 / 60 / 60) + .5)
+            local vehicleHours = math.floor((vehicle.operatingTime / 1000 / 60 / 60) + .5)
+            local vehicleHoursTxt = g_i18n:getText("details_operating_time") .. ": " .. tostring(vehicleHours)
             local assetDetails = vehicleAgeTxt .. ", " .. vehicleHoursTxt
 
             local asset = NWT_entry.new(g_currentMission:getIsServer(), g_currentMission:getIsClient())
@@ -111,7 +112,7 @@ function NWT_netWorthCalcUtil:getLivestockEntries(entryTable, farmId)
             end
 
             if livestockValue ~= 0 then
-                local description = placeable.spec_husbandryAnimals.animalType.groupTitle
+                local description = tostring(placeable.spec_husbandryAnimals.animalType.groupTitle)
                 local assetDetails = placeable:getName() .. ", " .. livestockNumber .. " " .. description
                 local assetCategory = g_i18n:getText("table_cat_inventory")
                 local assetSubCategory = g_i18n:getText("table_livestock")
