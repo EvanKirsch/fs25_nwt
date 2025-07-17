@@ -1,8 +1,8 @@
-﻿<?xml version="4.0" encoding="utf-8" standalone="no" ?>
-<modDesc descVersion="95" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://validation.gdn.giants-software.com/xml/fs25/modDesc.xsd">
-  <author>Evan Kirsch</author>	
+﻿<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<modDesc descVersion="97" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://validation.gdn.giants-software.com/xml/fs25/modDesc.xsd">
+  <author>Evan Kirsch</author>
   <version>1.0.0.0</version>    
-	<title>
+  <title>
       <en>Net Worth Tracker</en>
   </title>
   <description>
@@ -15,14 +15,14 @@
     GitHub-Link: https://github.com/EvanKirsch/fs25_nwt
     ]]></de>
   </description>    
-	<iconFilename>icon_NetWorthTracker.dds</iconFilename>
-	<l10n filenamePrefix="translations/translation" />
-  <multiplayer supported="false"/>	
-	<extraSourceFiles>
-        <sourceFile filename="src/NWT_netWorthTracker.lua" />
-        <sourceFile filename="src/util/NWT_fillCalcUtil.lua" />
-        <sourceFile filename="src/util/NWT_netWorthCalcUtil.lua" />
-        <sourceFile filename="src/gui/NWT_inGameMenuNetWorthTracker.lua" />
-        <sourceFile filename="src/model/NWT_entry.lua" />
-	</extraSourceFiles>
+  <iconFilename>icon_NetWorthTracker.dds</iconFilename>
+  <l10n filenamePrefix="translations/translation" />
+  <multiplayer supported="false"/>
+  <extraSourceFiles>
+    <sourceFile filename="src/NWT_netWorthTracker.lua" />
+    <sourceFile filename="src/util/NWT_fillCalcUtil.lua" />
+    <sourceFile filename="src/util/NWT_netWorthCalcUtil.lua" />
+    <sourceFile filename="src/gui/NWT_inGameMenuNetWorthTracker.lua" />
+    <sourceFile filename="src/model/NWT_entry.lua" />
+  </extraSourceFiles>
 </modDesc>
