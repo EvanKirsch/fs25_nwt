@@ -34,9 +34,7 @@ The types of entries:
   - Loan : Amount of loan taken out by the user. This is natively agregated by the loan system.
     - Mods to the loan system are currently not supported
 
-### TODO
-- [ ] test root crop storages
-- [ ] greenhouses?
-- [ ] change menu icon 
-- [ ] add fill icons
-- [ ] remove debug statements
+### Future Feature List 
+- Add Fill Icons
+- Column Filters
+- Dynamic Totals

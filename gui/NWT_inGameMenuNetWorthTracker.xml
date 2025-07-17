@@ -2,6 +2,9 @@
 <GUI name="NWT_inGameMenuNetWorthTracker">
     <GuiElement profile="fs25_menuContainer">
         <GuiElement profile="fs25_menuHeaderPanel">
+            <Bitmap profile="fs25_menuHeaderIconBg">
+                <Bitmap profile="NWT_menuIcon"/>
+            </Bitmap>
             <Text profile="NWT_menuHeaderText" text="$l10n_ui_header_title" />
         </GuiElement>
 
@@ -125,12 +128,17 @@
 
          <Profile name="NWT_menuHeaderText" extends="fs25_textDefault">
              <size value="600px 64px" />
-             <position value="0px 0px" />
-             <textSize value="31px"/>
+             <position value="100px 10px" />
+             <textSize value="42px"/>
              <textBold value="false"/>
              <textUpperCase value="true"/>
              <textDisabledColor value="$preset_colorDisabled"/>
          </Profile>
+        <Profile name="NWT_menuIcon" extends="baseReference" with="anchorMiddleCenter">
+            <size value="50px 50px" />
+            <imageSliceId value="gui.icon_ingameMenu_prices" />
+            <imageColor value="$preset_fs25_colorMainDark" />
+        </Profile>
 
         <Profile name="NWT_inGameMenuFooterBox" extends="baseReference" with="anchorBottomStretchingX">
             <size value="100% 100px"/>

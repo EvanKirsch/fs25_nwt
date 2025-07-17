@@ -120,7 +120,6 @@ function NWT_inGameMenuNetWorthTracker:populateCellForItemInSection(list, sectio
 end
 
 function NWT_inGameMenuNetWorthTracker:onClickLineItemSort(entry)
-    print("---- onClickLineItemSort ---")
     self:playSample(GuiSoundPlayer.SOUND_SAMPLES.CLICK)
     self:hideSortIcons()
 
@@ -141,7 +140,6 @@ function NWT_inGameMenuNetWorthTracker:onClickLineItemSort(entry)
 end
 
 function NWT_inGameMenuNetWorthTracker:onClickCategorySort(entry)
-    print("---- onClickLineItemSort ---")
     self:playSample(GuiSoundPlayer.SOUND_SAMPLES.CLICK)
     self:hideSortIcons()
 
@@ -166,7 +164,6 @@ function NWT_inGameMenuNetWorthTracker:onClickCategorySort(entry)
 end
 
 function NWT_inGameMenuNetWorthTracker:onClickValueSort(entry)
-    print("--- onClickValueSort ---")
     self:playSample(GuiSoundPlayer.SOUND_SAMPLES.CLICK)
     self:hideSortIcons()
 
