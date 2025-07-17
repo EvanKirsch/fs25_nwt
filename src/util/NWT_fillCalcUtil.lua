@@ -12,6 +12,7 @@ local placeableFillEntryImpls = {
    spec_husbandry     = function(a, b, c) return NWT_fillCalcUtil:husbandry_FillCalculatorImpl(a, b, c) end,
    spec_manureHeap    = function(a, b, c) return NWT_fillCalcUtil:manureHeap_FillCalculatorImpl(a, b, c) end,
    spec_bunkerSilo    = function(a, b, c) return NWT_fillCalcUtil:bunkerSilo_FillCalculatorImpl(a, b, c) end,
+   spec_objectStorage = function(a, b, c) return NWT_fillCalcUtil:objectStorage_FillCalculatorImpl(a, b, c) end,
 }
 
 function NWT_fillCalcUtil:getFillEntries(entryTable, farmId)
@@ -146,6 +147,45 @@ function NWT_fillCalcUtil:husbandry_FillCalculatorImpl(fillTable, farmId, placea
     if placeable.spec_husbandry.storage ~= nil then
         local fillLevels = placeable.spec_husbandry.storage.fillLevels
         fillTable = self:fillEntryCalculator(fillTable, farmId, fillLevels)
+    end
+
+    return fillTable
+end
+
+function NWT_fillCalcUtil:objectStorage_FillCalculatorImpl(fillTable, farmId, placeable)
+    local objectInfos = placeable.spec_objectStorage.objectInfos
+    if objectInfos ~= nil then
+        for _, objectInfo in objectInfos do
+
+            local objects = objectInfo.objects
+            if objects ~= nil then
+                for _, object in objects do
+                    local fillId = 0
+                    local fillAmount = 0
+
+                    if object.baleAttributes ~= nil then
+                        fillId = object.baleAttributes.fillType
+                        fillAmount = object.baleAttributes.fillLevel
+
+                    elseif object.palletAttributes ~= nil then
+                        fillId = object.palletAttributes.fillType
+                        fillAmount = object.palletAttributes.fillLevel
+
+                    end
+
+                    if fillId ~= 0 and fillAmount ~= 0 then
+                        local storageFillLevels = {}
+
+                        storageFillLevels[fillId] = fillAmount
+                        fillTable = self:fillEntryCalculator(fillTable, farmId, storageFillLevels)
+
+                    end
+
+                end
+
+            end
+        end
+
     end
 
     return fillTable

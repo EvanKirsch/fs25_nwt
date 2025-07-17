@@ -17,6 +17,7 @@ The types of entries:
         - `spec_husbandry` if included in `storage.fillLevels`
         - `spec_manureHeap` if included in `manureHeap.fillLevels` 
         - `spec_bunkerSilo` please see implementation for details
+        - `spec_objectStorage` if include in `objectInfos[n].objects` and as either has either `baleAttributes` or `palletAttributes`
      - Vehicle fill amounts will be included if owned by the player. Vehicle Mod's fills will be included if `spec_fillUnit.fillUnits` is supported
      - Bales are included if registered and the objects are `Bale`
      - Production's fills are incuded if it is included in `productionChainManager.productionPoints` and is included in `production.outputFillTypeIdsArray` and `production.storage:getFillLevel()`
@@ -34,6 +35,8 @@ The types of entries:
     - Mods to the loan system are currently not supported
 
 ### TODO
-- [ ] test pallet, bale, and root crop storages
+- [ ] test root crop storages
+- [ ] greenhouses?
 - [ ] change menu icon 
+- [ ] add fill icons
 - [ ] remove debug statements
