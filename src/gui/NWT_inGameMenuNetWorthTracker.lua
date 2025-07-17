@@ -6,6 +6,11 @@
 NWT_inGameMenuNetWorthTracker = {}
 NWT_inGameMenuNetWorthTracker.entryData = {}
 
+-- counters to track current status of sorting
+local lineItemSort = 0
+local categorySort = 0
+local valueSort = 0
+
 NWT_inGameMenuNetWorthTracker._mt = Class(NWT_inGameMenuNetWorthTracker, TabbedMenuFrameElement)
 
 function NWT_inGameMenuNetWorthTracker.new(i18n, messageCenter)
@@ -28,6 +33,7 @@ end
 function NWT_inGameMenuNetWorthTracker:onFrameOpen(element)
     NWT_inGameMenuNetWorthTracker:superClass().onFrameOpen(self)
 
+    self:hideSortIcons()
     self:updateContent()
 
     FocusManager:setFocus(self.entryTable)
@@ -113,12 +119,6 @@ function NWT_inGameMenuNetWorthTracker:populateCellForItemInSection(list, sectio
     cell:getAttribute("entryAmount"):setText(g_i18n:formatMoney(loc_entryData.entryAmount, 0, true, true))
 end
 
--- counters to track current status of sorting
-local lineItemSort = 0
-local categorySort = 0
-local valueSort = 0
-
-
 function NWT_inGameMenuNetWorthTracker:onClickLineItemSort(entry)
     print("---- onClickLineItemSort ---")
     self:playSample(GuiSoundPlayer.SOUND_SAMPLES.CLICK)
@@ -128,11 +128,11 @@ function NWT_inGameMenuNetWorthTracker:onClickLineItemSort(entry)
     lineItemSort = (lineItemSort + 1) % 2
     if lineItemSort == 0 then
         self.iconLineItemAscending:setVisible(true)
-        sortFunction = function (a, b) return a.entryTitle < b.entryTitle end
+        sortFunction = function (a, b) return string.lower(a.entryTitle) < string.lower(b.entryTitle) end
 
     elseif lineItemSort == 1 then
         self.iconLineItemDescending:setVisible(true)
-        sortFunction = function (a, b) return a.entryTitle > b.entryTitle end
+        sortFunction = function (a, b) return string.lower(a.entryTitle) > string.lower(b.entryTitle) end
 
     end
 
@@ -150,13 +150,13 @@ function NWT_inGameMenuNetWorthTracker:onClickCategorySort(entry)
     if categorySort == 0 then
         self.iconCategoryAscending:setVisible(true)
         sortFunction = function (a, b)
-            return a.category .. tostring(a.subCategory) < b.category .. tostring(b.subCategory)
+            return string.lower(a.category .. tostring(a.subCategory)) < string.lower(b.category .. tostring(b.subCategory))
         end
 
     elseif categorySort == 1 then
         self.iconCategoryDescending:setVisible(true)
         sortFunction = function (a, b)
-            return a.category .. tostring(a.subCategory) > b.category .. tostring(b.subCategory)
+            return string.lower(a.category .. tostring(a.subCategory)) > string.lower(b.category .. tostring(b.subCategory))
         end
 
     end

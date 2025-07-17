@@ -1,6 +1,11 @@
 # NWT
 FS 2025 balance sheet
 
+### Known Issues
+- Animal values are not accurate if health < 100% 
+- Horse values are not accurate 
+- Fill currently in leased vehicles is not incuded in fill calcuations
+
 ### Implementaion Details
 Produces a menu tallying the total value of a users farm. Entries are not included if they are for an amount equal to 0.
 
@@ -30,7 +35,5 @@ The types of entries:
 
 ### TODO
 - [ ] test pallet, bale, and root crop storages
-- [ ] figure out how sell prices are calcuated for animals
 - [ ] change menu icon 
-- [ ] null saftey for string concatenation
-- [ ] fill for leased vehicles
+- [ ] remove debug statements
