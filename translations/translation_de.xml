@@ -9,7 +9,7 @@
         <text name="ui_footer_total" text="Gesamt"/>
         <text name="table_cat_cash" text="Kasse"/>
         <text name="table_cat_equipment" text="Ausrüstung"/>
-        <text name="table_cat_property" text="Property"/>
+        <text name="table_cat_property" text="Eigentum"/>
         <text name="table_cat_inventory" text="Inventar"/>
         <text name="table_cash" text="Kasse"/>
         <text name="table_loan" text="Darlehen"/>
