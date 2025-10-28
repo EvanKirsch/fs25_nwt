@@ -1,6 +1,9 @@
 # NWT
 FS 2025 balance sheet
 
+### Manual Build Instructions
+`git archive -o FS25_netWorthTracker.zip HEAD`
+
 ### Known Issues
 - Animal values are not accurate if health < 100% 
 - Horse values are not accurate 
