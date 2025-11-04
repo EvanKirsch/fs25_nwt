@@ -1,5 +1,10 @@
 # NWT
-FS 2025 balance sheet
+NWT adds a new screen to FS25 to easily view your farm's value. It is not currently avaiable on the mod hub and is awaiting review by Giants software. If you would like to use the mod before it becomes avaiable see the "Manual Install Instructions" section below.
+![screenshot 1](https://github.com/EvanKirsch/fs25_nwt/blob/master/screenshoots/Screenshot_1.jpg)
+
+### Manual Install Instructions
+1. Download `FS25_netWorthTracker.zip` from the latest release on the [releases page](https://github.com/EvanKirsch/fs25_nwt/releases)
+2. Move your downloaded copy of `FS25_netWorthTracker.zip` to `Documents\My Games\Farming Simulator 2025\mods`
 
 ### Manual Build Instructions
 `git archive -o FS25_netWorthTracker.zip HEAD`
