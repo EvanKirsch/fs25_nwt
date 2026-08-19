@@ -37,6 +37,19 @@
          <position value="0px -40px" />
      </Profile>
 
+     <Profile name="NWT_historyChartPanel" extends="emptyPanel" with="anchorStretchingYLeft pivotTopLeft">
+         <imageColor value="$preset_fs25_colorGreyDark_50" />
+     </Profile>
+
+     <Profile name="NWT_historyChart" extends="baseReference" with="anchorStretchingXY">
+     </Profile>
+
+     <Profile name="NWT_historyListWrapper" extends="emptyPanel" with="anchorStretchingYRight">
+     </Profile>
+
+     <Profile name="NWT_inGameMenuHeaderRightAnchored" extends="NWT_inGameMenuHeaderRight" with="anchorStretchingYRight">
+     </Profile>
+
      <Profile name="NWT_listItem" extends="baseReference" with="anchorTopStretchingX alternating">
          <height value="32px"/>
          <imageColor value="$preset_fs25_colorGrey" />

@@ -112,6 +112,12 @@ end
 function NWT_inGameMenuNetWorthTracker:getHistoryTable()
     self.historyData = self.farmHistoryDelegate:getFarmHistories()
     table.sort(self.historyData, function (a, b) return a.dayId > b.dayId end)
+
+    if self.historyChart ~= nil then
+        local chartData = table.clone(self.historyData)
+        table.sort(chartData, function (a, b) return a.dayId < b.dayId end)
+        self.historyChart:setHistoryData(chartData)
+    end
 end
 
 function NWT_inGameMenuNetWorthTracker:getNumberOfSections()
