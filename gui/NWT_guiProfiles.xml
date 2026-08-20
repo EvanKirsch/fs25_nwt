@@ -39,6 +39,7 @@
 
      <Profile name="NWT_historyChartPanel" extends="emptyPanel" with="anchorStretchingYLeft pivotTopLeft">
          <imageColor value="$preset_fs25_colorGreyDark_50" />
+         <position value="0px -40px" />
      </Profile>
 
      <Profile name="NWT_historyChart" extends="baseReference" with="anchorStretchingXY">
@@ -55,14 +56,13 @@
 
      <Profile name="NWT_historyFilterRow" extends="baseReference" with="anchorTopStretchingX">
          <position value="0px 0px" />
-         <size value="100% 50px" />
+         <size value="100% 32px" />
      </Profile>
 
-     <Profile name="NWT_historyFilterEndZone" extends="baseReference" with="anchorStretchingYLeft pivotTopLeft">
+     <Profile name="NWT_historyFilterWrapper" extends="emptyPanel" with="anchorStretchingYLeft pivotTopLeft">
      </Profile>
 
      <Profile name="NWT_historyContentContainer" extends="emptyPanel" with="anchorStretchingXY pivotTopLeft">
-         <position value="0px -60px" />
          <size value="100% 93%" />
      </Profile>
 

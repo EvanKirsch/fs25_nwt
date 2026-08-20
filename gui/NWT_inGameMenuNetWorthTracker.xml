@@ -73,19 +73,23 @@
 
          <GuiElement profile="fs25_subCategorySelectorTabbedContainer" id="inGameMenuNetWorthHistoryPage" name="layout">
             <GuiElement profile="NWT_historyFilterRow" id="historyFilterRow">
-                <Button profile="NWT_inGameMenuHeaderRight" position="10px 0px" size="22px 32px" text="&lt;&lt;" onClick="onClickFilterStartJumpPrev"/>
-                <Button profile="NWT_inGameMenuHeaderRight" position="32px 0px" size="22px 32px" text="&lt;" onClick="onClickFilterStartPrev"/>
-                <Text profile="NWT_inGameMenuHeader" position="54px 0px" size="170px 32px" textAlignment="center" id="filterStartDayText"/>
-                <Button profile="NWT_inGameMenuHeader" position="224px 0px" size="22px 32px" text="&gt;" onClick="onClickFilterStartNext"/>
-                <Button profile="NWT_inGameMenuHeader" position="246px 0px" size="22px 32px" text="&gt;&gt;" onClick="onClickFilterStartJumpNext"/>
 
-                <GuiElement profile="NWT_historyFilterEndZone" id="historyFilterEndZone" size="70% 100%">
+                <GuiElement profile="NWT_historyFilterWrapper" id="historyFilterStartZone" size="100% 100%">
+                    <Button profile="NWT_inGameMenuHeaderRight" position="10px 0px" size="22px 32px" text="&lt;&lt;" onClick="onClickFilterStartJumpPrev"/>
+                    <Button profile="NWT_inGameMenuHeaderRight" position="32px 0px" size="22px 32px" text="&lt;" onClick="onClickFilterStartPrev"/>
+                    <Text profile="NWT_inGameMenuHeader" position="54px 0px" size="170px 32px" textAlignment="center" id="filterStartDayText"/>
+                    <Button profile="NWT_inGameMenuHeader" position="224px 0px" size="22px 32px" text="&gt;" onClick="onClickFilterStartNext"/>
+                    <Button profile="NWT_inGameMenuHeader" position="246px 0px" size="22px 32px" text="&gt;&gt;" onClick="onClickFilterStartJumpNext"/>
+                </GuiElement>
+
+                <GuiElement profile="NWT_historyFilterWrapper" id="historyFilterEndZone" size="70% 100%">
                     <Button profile="NWT_inGameMenuHeaderRightAnchoredRight" position="-258px 0px" size="22px 32px" text="&lt;&lt;" onClick="onClickFilterEndJumpPrev"/>
                     <Button profile="NWT_inGameMenuHeaderRightAnchoredRight" position="-236px 0px" size="22px 32px" text="&lt;" onClick="onClickFilterEndPrev"/>
                     <Text profile="NWT_inGameMenuHeaderLeftAnchoredRight" position="-66px 0px" size="170px 32px" textAlignment="center" id="filterEndDayText"/>
                     <Button profile="NWT_inGameMenuHeaderLeftAnchoredRight" position="-44px 0px" size="22px 32px" text="&gt;" onClick="onClickFilterEndNext"/>
                     <Button profile="NWT_inGameMenuHeaderLeftAnchoredRight" position="-22px 0px" size="22px 32px" text="&gt;&gt;" onClick="onClickFilterEndJumpNext"/>
                 </GuiElement>
+
             </GuiElement>
 
             <GuiElement profile="NWT_historyContentContainer" id="historyContentContainer">
@@ -102,14 +106,14 @@
                         <Button profile="NWT_inGameMenuHeaderRightAnchoredRight" position="-20px 0px" size="280px 32px" text="$l10n_ui_header_net_worth" handleFocus="false"/>
                     </GuiElement>
 
-                    <SmoothList profile="NWT_list" size="100% 95%" id="historyTable" >
+                    <SmoothList profile="NWT_list" id="historyTable" >
                         <ListItem profile="NWT_listItem" >
                             <Text profile="NWT_rowCellLeft" position="20px 0px" size="200px 20px" name="historyDay"/>
                             <Text profile="NWT_rowCellRight" position="-20px 0px" size="100px 20px" name="historyAmount"/>
                         </ListItem>
                     </SmoothList>
 
-                    <ThreePartBitmap profile="NWT_inGameMenuSlider" size="6px 95%">
+                    <ThreePartBitmap profile="NWT_inGameMenuSlider" size="6px 100%">
                         <Slider profile="fs25_listSlider" dataElementId="historyTable"/>
                     </ThreePartBitmap>
                 </GuiElement>
