@@ -17,6 +17,7 @@ NWT_inGameMenuNetWorthTracker = {
 NWT_inGameMenuNetWorthTracker.entryData = {}
 
 NWT_inGameMenuNetWorthTracker.NUM_CATEGORIES = #NWT_inGameMenuNetWorthTracker.CATEGORY_TEXTS
+NWT_inGameMenuNetWorthTracker.FILTER_JUMP_STEP = 10
 
 -- counters to track current status of sorting
 local lineItemSort = 0
@@ -37,6 +38,14 @@ function NWT_inGameMenuNetWorthTracker.new(i18n, messageCenter)
     self.farmValueDelegate = NWT_farmValueDelegate.new()
     self.farmHistoryDelegate = NWT_historyDelegate.new()
 
+    self.filterStartDayId = nil
+    self.filterEndDayId = nil
+    self.filterDayIds = {}
+    self.filterDayTexts = {}
+    self.filterStartIndex = 1
+    self.filterEndIndex = 1
+    self.filterOptionsPopulated = false
+
     return self
  end
 
@@ -56,6 +65,10 @@ function NWT_inGameMenuNetWorthTracker:onFrameOpen(element)
 
     self:hideAllSortIcons()
     self:updateContent()
+
+    if not self.filterOptionsPopulated then
+        self:populateFilterOptions()
+    end
 
     self:updateSubCategoryPages(self.CATEGORIES.FARM_VALUE)
     FocusManager:setFocus(self.subCategoryPages[self.CATEGORIES.FARM_VALUE]:getDescendantByName("layout"))
@@ -111,6 +124,17 @@ end
 
 function NWT_inGameMenuNetWorthTracker:getHistoryTable()
     self.historyData = self.farmHistoryDelegate:getFarmHistories()
+
+    if self.filterStartDayId ~= nil and self.filterEndDayId ~= nil then
+        local filtered = {}
+        for _, h in pairs(self.historyData) do
+            if h.dayId >= self.filterStartDayId and h.dayId <= self.filterEndDayId then
+                table.insert(filtered, h)
+            end
+        end
+        self.historyData = filtered
+    end
+
     table.sort(self.historyData, function (a, b) return a.dayId > b.dayId end)
 
     if self.historyChart ~= nil then
@@ -118,6 +142,110 @@ function NWT_inGameMenuNetWorthTracker:getHistoryTable()
         table.sort(chartData, function (a, b) return a.dayId < b.dayId end)
         self.historyChart:setHistoryData(chartData)
     end
+end
+
+function NWT_inGameMenuNetWorthTracker:populateFilterOptions()
+    local allHistory = self.farmHistoryDelegate:getFarmHistories()
+    local seen, days = {}, {}
+    for _, h in pairs(allHistory) do
+        if not seen[h.dayId] then
+            seen[h.dayId] = true
+            table.insert(days, h)
+        end
+    end
+    table.sort(days, function (a, b) return a.dayId < b.dayId end)
+
+    self.filterDayIds = {}
+    self.filterDayTexts = {}
+    for i, h in ipairs(days) do
+        self.filterDayIds[i] = h.dayId
+        self.filterDayTexts[i] = self:getDateString(h)
+    end
+
+    self.filterStartIndex = 1
+    self.filterEndIndex = #days
+
+    self.filterStartDayId = nil
+    self.filterEndDayId = nil
+    self.filterOptionsPopulated = #days > 0
+
+    self:updateFilterLabels()
+end
+
+function NWT_inGameMenuNetWorthTracker:updateFilterLabels()
+    self.filterStartDayText:setText(self.filterDayTexts[self.filterStartIndex] or "")
+    self.filterEndDayText:setText(self.filterDayTexts[self.filterEndIndex] or "")
+end
+
+function NWT_inGameMenuNetWorthTracker:onClickFilterStartPrev(button)
+    self:playSample(GuiSoundPlayer.SOUND_SAMPLES.CLICK)
+    self.filterStartIndex = math.max(1, self.filterStartIndex - 1)
+    self:updateFilterLabels()
+    self:updateTable()
+end
+
+function NWT_inGameMenuNetWorthTracker:onClickFilterStartNext(button)
+    self:playSample(GuiSoundPlayer.SOUND_SAMPLES.CLICK)
+    self.filterStartIndex = math.min(#self.filterDayIds, self.filterStartIndex + 1)
+    self:updateFilterLabels()
+    self:updateTable()
+end
+
+function NWT_inGameMenuNetWorthTracker:onClickFilterStartJumpPrev(button)
+    self:playSample(GuiSoundPlayer.SOUND_SAMPLES.CLICK)
+    self.filterStartIndex = math.max(1, self.filterStartIndex - NWT_inGameMenuNetWorthTracker.FILTER_JUMP_STEP)
+    self:updateFilterLabels()
+    self:updateTable()
+end
+
+function NWT_inGameMenuNetWorthTracker:onClickFilterStartJumpNext(button)
+    self:playSample(GuiSoundPlayer.SOUND_SAMPLES.CLICK)
+    self.filterStartIndex = math.min(#self.filterDayIds, self.filterStartIndex + NWT_inGameMenuNetWorthTracker.FILTER_JUMP_STEP)
+    self:updateFilterLabels()
+    self:updateTable()
+end
+
+function NWT_inGameMenuNetWorthTracker:onClickFilterEndPrev(button)
+    self:playSample(GuiSoundPlayer.SOUND_SAMPLES.CLICK)
+    self.filterEndIndex = math.max(1, self.filterEndIndex - 1)
+    self:updateFilterLabels()
+    self:updateTable()
+end
+
+function NWT_inGameMenuNetWorthTracker:onClickFilterEndNext(button)
+    self:playSample(GuiSoundPlayer.SOUND_SAMPLES.CLICK)
+    self.filterEndIndex = math.min(#self.filterDayIds, self.filterEndIndex + 1)
+    self:updateFilterLabels()
+    self:updateTable()
+end
+
+function NWT_inGameMenuNetWorthTracker:onClickFilterEndJumpPrev(button)
+    self:playSample(GuiSoundPlayer.SOUND_SAMPLES.CLICK)
+    self.filterEndIndex = math.max(1, self.filterEndIndex - NWT_inGameMenuNetWorthTracker.FILTER_JUMP_STEP)
+    self:updateFilterLabels()
+    self:updateTable()
+end
+
+function NWT_inGameMenuNetWorthTracker:onClickFilterEndJumpNext(button)
+    self:playSample(GuiSoundPlayer.SOUND_SAMPLES.CLICK)
+    self.filterEndIndex = math.min(#self.filterDayIds, self.filterEndIndex + NWT_inGameMenuNetWorthTracker.FILTER_JUMP_STEP)
+    self:updateFilterLabels()
+    self:updateTable()
+end
+
+function NWT_inGameMenuNetWorthTracker:updateTable()
+    local startDayId = self.filterDayIds[self.filterStartIndex]
+    local endDayId = self.filterDayIds[self.filterEndIndex]
+
+    if startDayId ~= nil and endDayId ~= nil and startDayId > endDayId then
+        startDayId, endDayId = endDayId, startDayId
+    end
+
+    self.filterStartDayId = startDayId
+    self.filterEndDayId = endDayId
+
+    self:getHistoryTable()
+    self.historyTable:reloadData()
 end
 
 function NWT_inGameMenuNetWorthTracker:getNumberOfSections()

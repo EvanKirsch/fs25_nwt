@@ -47,7 +47,23 @@
      <Profile name="NWT_historyListWrapper" extends="emptyPanel" with="anchorStretchingYRight">
      </Profile>
 
-     <Profile name="NWT_inGameMenuHeaderRightAnchored" extends="NWT_inGameMenuHeaderRight" with="anchorStretchingYRight">
+     <Profile name="NWT_inGameMenuHeaderRightAnchoredRight" extends="NWT_inGameMenuHeaderRight" with="anchorStretchingYRight">
+     </Profile>
+
+     <Profile name="NWT_inGameMenuHeaderLeftAnchoredRight" extends="NWT_inGameMenuHeader" with="anchorStretchingYRight">
+     </Profile>
+
+     <Profile name="NWT_historyFilterRow" extends="baseReference" with="anchorTopStretchingX">
+         <position value="0px 0px" />
+         <size value="100% 50px" />
+     </Profile>
+
+     <Profile name="NWT_historyFilterEndZone" extends="baseReference" with="anchorStretchingYLeft pivotTopLeft">
+     </Profile>
+
+     <Profile name="NWT_historyContentContainer" extends="emptyPanel" with="anchorStretchingXY pivotTopLeft">
+         <position value="0px -60px" />
+         <size value="100% 93%" />
      </Profile>
 
      <Profile name="NWT_listItem" extends="baseReference" with="anchorTopStretchingX alternating">
