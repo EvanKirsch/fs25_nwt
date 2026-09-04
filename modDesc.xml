@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no" ?>
 <modDesc descVersion="105" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://validation.gdn.giants-software.com/xml/fs25/modDesc.xsd">
   <author>Evan Kirsch</author>
-  <version>1.1.0.2</version>
+  <version>1.1.0.3</version>
   <title>
       <en>Net Worth Tracker</en>
       <de>Vermögens-Tracker</de>
@@ -33,6 +33,13 @@ Youtube Demo [EN]: https://youtu.be/nhx3g8MrU3E
 
 Changelog
 ---
+1.1.0.3:
+  - Adds Farm Value History graph with date range filtering
+  - Localizes farmland name and size strings
+  - Adds fill type icons to entry list rows
+  - Fixes error when deriving vehicle category
+  - Fixes cash amount lookup for multi-farm saves
+  - Fixes date string operator precedence when year is null
 1.1.0.2:
   - Corrects animal value when health or fitness is less than 100%
   - Fixes error when generating files before game has been saved
@@ -74,6 +81,13 @@ YouTube-Demo [EN]: https://youtu.be/nhx3g8MrU3E
 
 Änderungsprotokoll
 ---
+1.1.0.3:
+  - Fügt ein Diagramm zum Hofwertverlauf mit Filterung nach Zeitraum hinzu
+  - Lokalisiert Namen und Größenangaben von Ackerland
+  - Fügt Symbole für Füllstände zu den Einträgen der Listenzeilen hinzu
+  - Behebt einen Fehler bei der Ermittlung der Fahrzeugkategorie
+  - Behebt die Ermittlung des Bargeldbetrags bei Speicherständen mit mehreren Höfen
+  - Behebt die Operatorpriorität der Datumszeichenfolge, wenn das Jahr null ist
 1.1.0.2:
   - Korrigiert den Tierwert, wenn Gesundheit oder Fitness unter 100% liegen.
   - Behebt einen Fehler beim Generieren von Dateien, bevor das Spiel gespeichert wurde.
